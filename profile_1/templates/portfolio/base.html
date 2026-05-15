@@ -20,6 +20,7 @@
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
     {% block extra_css %}{% endblock %}
 
   </head>
@@ -104,7 +105,7 @@
       </nav>
       <!-- END nav -->
 
-      <div class="cover-v1 jarallax" style="background-image: url('{% static 'images/cover_bg_2.jpg' %}');" id="home-section">
+      <div class="cover-v1 jarallax" style="background-image: url('{% static "images/cover_bg_2.jpg" %}');" id="home-section">
         <div class="container">
           <div class="row align-items-center">
               
@@ -174,8 +175,75 @@
       </div>
 
 
+      <div class="unslate_co--section">
+        <div class="container">
+          <div class="row about-timelines">
 
-      <div class="unslate_co--section" id="portfolio-section">
+            <div class="col-lg-6 mb-5">
+              <h2 class="text-pretitle gsap-reveal">Experience</h2>
+              <div class="timeline">
+
+                <div class="timeline__block gsap-reveal">
+                  <div class="timeline__bullet"></div>
+                  <div class="timeline__header">
+                    <h4 class="timeline__title">CubexO Software Solutions</h4>
+                    <h5 class="timeline__meta">Software Engineer</h5>
+                    <p class="timeline__timeframe">May 2025 – Present</p>
+                  </div>
+                  <div class="timeline__desc">
+                    <p>Building scalable backend applications and automation systems using modern development practices. Working on API development, cloud-based workflows, data processing, and deployment pipelines while contributing to reliable and high-performance software solutions. Also involved in DevOps practices, infrastructure management, and system optimization for production environments.</p>
+                  </div>
+                </div>
+
+                <div class="timeline__block gsap-reveal">
+                  <div class="timeline__bullet"></div>
+                  <div class="timeline__header">
+                    <h4 class="timeline__title">Active Now Technologies</h4>
+                    <h5 class="timeline__meta">Python Developer</h5>
+                    <p class="timeline__timeframe">January 2024 – February 2025</p>
+                  </div>
+                  <div class="timeline__desc">
+                    <p>Worked on backend development, data automation, and web application features for data-driven projects. Contributed to API development, workflow automation, containerized deployments, and data processing pipelines while collaborating on cloud and DevOps-related tasks.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-lg-6 mb-5">
+              <h2 class="text-pretitle gsap-reveal">Education</h2>
+              <div class="timeline">
+
+                <div class="timeline__block gsap-reveal">
+                  <div class="timeline__bullet"></div>
+                  <div class="timeline__header">
+                    <h4 class="timeline__title">Devi Ahilya Vishwavidyalaya, Indore</h4>
+                    <h5 class="timeline__meta">Master of Technology in Computer Science</h5>
+                    <p class="timeline__timeframe">June 2023 – May 2025</p>
+                  </div>
+                  <div class="timeline__desc">
+                    <p>Specialized in software engineering, machine learning, distributed systems, and cloud computing. Worked on AI-powered applications, scalable backend systems, and research focused on data processing and intelligent solutions.</p>
+                  </div>
+                </div>
+
+                <div class="timeline__block gsap-reveal">
+                  <div class="timeline__bullet"></div>
+                  <div class="timeline__header">
+                    <h4 class="timeline__title">Sri Aurobindo Institute of Technology, Indore</h4>
+                    <h5 class="timeline__meta">Bachelor of Technology in Computer Science</h5>
+                    <p class="timeline__timeframe">July 2019 – May 2023</p>
+                  </div>
+                  <div class="timeline__desc">
+                    <p>Built a strong foundation in programming, software development, system design, and problem-solving while exploring backend engineering, cloud technologies, and real-world application development.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>      <div class="unslate_co--section" id="portfolio-section">
         <div class="container">
           
           

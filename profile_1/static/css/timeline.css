@@ -1,0 +1,99 @@
+/* Timeline styles extracted from Luther template */
+
+.about-timelines {
+    --timeline-left-padding: 56px;
+    --timeline-top-adjust: 16px;
+    padding-top: 64px;
+    color: #fff;
+}
+
+.timeline {
+    margin-top: 40px;
+    padding-right: 1vw;
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: calc(100% - var(--timeline-top-adjust));
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: var(--timeline-top-adjust);
+    left: 3px;
+}
+
+.timeline__block {
+    padding-left: var(--timeline-left-padding);
+    padding-bottom: 32px;
+    position: relative;
+}
+
+.timeline__block:last-child {
+    padding-bottom: 0;
+}
+
+.timeline__bullet {
+    display: block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #eabe7c; /* Luther accent color */
+    position: absolute;
+    top: var(--timeline-top-adjust);
+    left: 0;
+}
+
+.timeline__title {
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 4px;
+    color: #fff;
+}
+
+.timeline__meta {
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 4px;
+    color: #ccc;
+}
+
+.timeline__timeframe {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: #888;
+    margin-top: 4px;
+    margin-bottom: 16px;
+}
+
+.timeline__desc p {
+    font-size: 1rem;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+.text-pretitle {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: #eabe7c;
+    margin-bottom: 16px;
+    display: block;
+}
+
+@media screen and (max-width: 1000px) {
+    .about-timelines {
+        --timeline-left-padding: 40px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .about-timelines {
+        --timeline-left-padding: 32px;
+    }
+}
