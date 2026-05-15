@@ -21,6 +21,7 @@
     <!-- Theme Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero-animation.css' %}">
     {% block extra_css %}{% endblock %}
 
   </head>
@@ -88,6 +89,7 @@
             </div>
             <div class="col-md-5 text-right text-lg-left">
               <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
+                <li><a href="#knowledge-section" class="nav-link">Knowledge</a></li>
                 <li><a href="#skills-section" class="nav-link">Skills</a></li>
                 <li><a href="#testimonial-section" class="nav-link">Testimonial</a></li>
                 <li><a href="#journal-section" class="nav-link">Journal</a></li>
@@ -105,13 +107,34 @@
       </nav>
       <!-- END nav -->
 
-      <div class="cover-v1 jarallax" style="background-image: url('{% static "images/cover_bg_2.jpg" %}');" id="home-section">
+      <div class="cover-v1 jarallax overlay" style="background-image: url('{% static 'images/cover_bg_2.jpg' %}');" id="home-section">
         <div class="container">
           <div class="row align-items-center">
               
-            <div class="col-md-7 mx-auto text-center">
-              <h1 class="heading gsap-reveal-hero">Unfold My</h1>
-              <h2 class="subheading gsap-reveal-hero">I’m Manshay Verma, a Software Engineer based in India.</h2>
+            <div class="col-md-10 mx-auto text-center">
+              <h1 class="heading hero-title text-white justify-content-center" id="hero-title">
+                <!-- Initial State -->
+                <div class="intro-wrapper">
+                    <span class="letter letter-u">U</span>
+                    <span class="letter unfold-letters">nfold</span>
+                    <span class="letter dot-letter">.</span>
+                    <span class="letter letter-m">M</span>
+                    <span class="letter letter-y">y</span>
+                </div>
+                <!-- Final State (Hidden target for positioning) -->
+                <div class="final-wrapper" style="position: absolute; opacity: 0; pointer-events: none;">
+                    <span class="letter m-target">M</span>
+                    <span class="manshay-part">
+                        <span class="letter anshay-letter">a</span>
+                        <span class="letter anshay-letter">n</span>
+                        <span class="letter anshay-letter">s</span>
+                        <span class="letter anshay-letter">h</span>
+                        <span class="letter anshay-letter">a</span>
+                        <span class="letter anshay-letter">y</span>
+                    </span>
+                </div>
+              </h1>
+              <h2 class="subheading hero-subheading text-white">I’m Manshay Verma, a Software Engineer who loves building complete and scalable solutions.</h2>
             </div>
 
           </div>
@@ -243,7 +266,57 @@
 
           </div>
         </div>
-      </div>      <div class="unslate_co--section" id="portfolio-section">
+      </div>
+
+      <div class="unslate_co--section" id="knowledge-section">
+        <div class="container">
+          <div class="section-heading-wrap text-center mb-5">
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Knowledge</span></h2>
+            <span class="gsap-reveal"><img src="{% static 'images/divider.png' %}" alt="divider" width="76"></span>
+          </div>
+
+          <div class="row gutter-v4 justify-content-center">
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-cogs"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Backend Development</h3>
+                  <p>Python, Django, FastAPI, REST APIs, Automation Systems.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-cloud"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Infrastructure & DevOps</h3>
+                  <p>AWS, Docker, CI/CD, Cloud Infrastructure, System Optimization.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-bar-chart"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Machine Learning</h3>
+                  <p>Data Processing, Intelligent Applications, Data Automation Pipelines.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="unslate_co--section" id="portfolio-section">
         <div class="container">
           
           
@@ -351,7 +424,7 @@
               </div>
 
               <div class="item branding packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% static 'images/work_7_a_md.jpg' %}images/work_7_a_md.jpg" class="portfolio-item item-portrait isotope-item gsap-reveal-img " data-fancybox="gallery" data-caption="Modern Building">
+                <a href="{% static 'images/work_7_a_md.jpg' %}" class="portfolio-item item-portrait isotope-item gsap-reveal-img " data-fancybox="gallery" data-caption="Modern Building">
                     <div class="overlay">
                       <span class="wrap-icon icon-photo2"></span>
                       <div class="portfolio-item-content">
@@ -770,6 +843,7 @@
     </div>
     <script src="{% static 'js/scripts-dist.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/hero-animation.js' %}"></script>
 
   </body>
 </html>
