@@ -491,51 +491,168 @@
 
 
 
-      <div class="unslate_co--section section-counter" id="skills-section">
+      <style>
+        .skill-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 15px;
+          padding: 30px;
+          height: 100%;
+          transition: all 0.3s ease;
+        }
+        .skill-card:hover {
+          transform: translateY(-10px);
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.2);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .skill-card .icon-wrap {
+          font-size: 40px;
+          margin-bottom: 20px;
+          display: inline-block;
+          color: #fff;
+        }
+        .skill-card h3 {
+          font-size: 20px;
+          margin-bottom: 15px;
+          font-weight: 700;
+          color: #fff;
+        }
+        .skill-card p {
+          font-size: 14px;
+          line-height: 1.6;
+          color: #aaa;
+          margin-bottom: 20px;
+        }
+        .tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .tech-tag {
+          background: rgba(255, 255, 255, 0.08);
+          color: #fff;
+          padding: 5px 12px;
+          border-radius: 50px;
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: all 0.2s ease;
+        }
+        .tech-tag:hover {
+          background: #fff;
+          color: #000;
+        }
+      </style>
+
+      <div class="unslate_co--section" id="skills-section">
         <div class="container">
           <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">My Skills</span></h2>
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Skills & Expertise</span></h2>
             <span class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
           </div>
 
+          <div class="row gutter-v4">
+            
+            <!-- Backend -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-cogs"></span></div>
+                <h3>Backend Systems</h3>
+                <p>Building scalable, performance-focused architectures with a focus on clean code and production reliability.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Django</span>
+                  <span class="tech-tag">FastAPI</span>
+                  <span class="tech-tag">Flask</span>
+                  <span class="tech-tag">DRF</span>
+                  <span class="tech-tag">REST APIs</span>
+                </div>
+              </div>
+            </div>
 
-          <div class="row pt-5">
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="90">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">WordPress</span>
+            <!-- Cloud & DevOps -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-cloud"></span></div>
+                <h3>Cloud & DevOps</h3>
+                <p>Managing cloud-native infrastructure with automated CI/CD pipelines and containerized deployments.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">AWS</span>
+                  <span class="tech-tag">Docker</span>
+                  <span class="tech-tag">Kubernetes</span>
+                  <span class="tech-tag">GitHub Actions</span>
+                  <span class="tech-tag">Linux</span>
+                </div>
               </div>
             </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="99">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">HTML/CSS</span>
+
+            <!-- ML & AI -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-lightbulb-o"></span></div>
+                <h3>AI & Machine Learning</h3>
+                <p>Developing intelligent models and predictive systems using modern deep learning and data processing techniques.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">TensorFlow</span>
+                  <span class="tech-tag">PyTorch</span>
+                  <span class="tech-tag">Scikit-learn</span>
+                  <span class="tech-tag">CNNs</span>
+                  <span class="tech-tag">Pandas</span>
+                </div>
               </div>
             </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="95">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">jQuery</span>
+
+            <!-- Data Engineering -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-bar-chart"></span></div>
+                <h3>Data Engineering</h3>
+                <p>Designing robust ETL pipelines and transforming raw data into actionable insights through analytics.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">PySpark</span>
+                  <span class="tech-tag">SQL</span>
+                  <span class="tech-tag">ETL</span>
+                  <span class="tech-tag">Streamlit</span>
+                  <span class="tech-tag">Plotly Dash</span>
+                </div>
               </div>
             </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="100">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">Design</span>
+
+            <!-- Databases -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-database"></span></div>
+                <h3>System Design</h3>
+                <p>Architecting database solutions for high-performance applications with optimized query handling.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">PostgreSQL</span>
+                  <span class="tech-tag">MongoDB</span>
+                  <span class="tech-tag">Redis</span>
+                  <span class="tech-tag">MySQL</span>
+                  <span class="tech-tag">SQLite</span>
+                </div>
               </div>
             </div>
+
+            <!-- Workflow -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-git"></span></div>
+                <h3>Engineering Workflow</h3>
+                <p>Following industry best practices for collaborative development, testing, and documentation.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Git</span>
+                  <span class="tech-tag">Postman</span>
+                  <span class="tech-tag">Swagger</span>
+                  <span class="tech-tag">Jira</span>
+                  <span class="tech-tag">Agile</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
