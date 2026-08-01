@@ -1,0 +1,85 @@
+/* Project Detail Cards */
+.project-detail-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+.project-detail-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+.detail-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #666;
+  margin-bottom: 8px;
+}
+.detail-val {
+  display: block;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Highlight Lists */
+.highlight-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.highlight-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.highlight-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Tech Stack Tags */
+.tech-stack-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+.tech-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #ccc;
+  transition: all 0.3s ease;
+}
+.tech-tag:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* Project Type Badge */
+.project-type-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px 15px;
+  border-radius: 30px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: #fff;
+}

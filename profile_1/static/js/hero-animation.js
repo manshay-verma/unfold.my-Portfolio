@@ -1,10 +1,19 @@
 /**
  * Hero Section Cinematic Animation - Pixel Perfect Transition
  * Concept: Unfold.My -> Manshay using target positioning
+ *
+ * NOTE: initHeroAnimation() is exported so the API fetch in
+ * cms-render.js can call it AFTER injecting hero data into the DOM.
+ * The window.load listener is kept as a fallback for static HTML usage.
  */
 
 window.addEventListener('load', function() {
-    setTimeout(initHeroAnimation, 800);
+    // Only fire automatically if hero-title already has data (static/fallback).
+    // cms-render.js will call initHeroAnimation() after fetch completes.
+    var title = document.getElementById('hero-title');
+    if (title && title.querySelector('.letter-m')) {
+        setTimeout(initHeroAnimation, 800);
+    }
 });
 
 function initHeroAnimation() {
@@ -13,13 +22,15 @@ function initHeroAnimation() {
 
     const intro = title.querySelector('.intro-wrapper');
     const final = title.querySelector('.final-wrapper');
+    if (!intro || !final) return;
+
     const mIntro = intro.querySelector('.letter-m');
     const mTarget = final.querySelector('.m-target');
     const anshay = final.querySelectorAll('.anshay-letter');
     const otherIntro = intro.querySelectorAll('.letter:not(.letter-m)');
     const subheading = document.querySelector('.hero-subheading');
 
-    if (!mIntro || !mTarget || !final) return;
+    if (!mIntro || !mTarget) return;
 
     // Use TimelineMax for compatibility
     const tl = new TimelineMax();
@@ -35,7 +46,7 @@ function initHeroAnimation() {
     TweenMax.set(final, { opacity: 0, visibility: 'visible' });
     TweenMax.set(anshay, { opacity: 0, y: 15 });
     TweenMax.set(mTarget, { opacity: 0 }); // Hide target M initially
-    TweenMax.set(subheading, { opacity: 0, y: 10 });
+    if (subheading) TweenMax.set(subheading, { opacity: 0, y: 10 });
 
     tl
         // 1. Fade out other letters in "Unfold.My"
@@ -65,14 +76,16 @@ function initHeroAnimation() {
             opacity: 1,
             y: 0,
             ease: Power3.easeOut
-        }, 0.05, "-=0.2")
+        }, 0.05, "-=0.2");
 
-        // 5. Final fade in subheading
-        .to(subheading, 1, {
+    // 5. Final fade in subheading
+    if (subheading) {
+        tl.to(subheading, 1, {
             opacity: 1,
             y: 0,
             ease: Power2.easeOut
         }, "-=0.5");
+    }
 
     tl.add(() => {
         // Cleanup: remove intro layer from DOM flow

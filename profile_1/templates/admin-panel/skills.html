@@ -1,0 +1,48 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}Skills{% endblock %}
+{% block page_title_header %}Skills{% endblock %}
+{% block nav_skills %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Skills</h2>
+  <a href="{% url 'admin_panel:skill-add' %}" class="btn-panel btn-primary-panel"><i class="fa-solid fa-plus"></i> Add Skill</a>
+</div>
+<div class="panel-card">
+  {% if items %}
+  <table class="panel-table">
+    <thead>
+      <tr><th>Name</th><th>Category</th><th>Percentage</th><th>Icon</th><th>Order</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><strong>{{ item.name }}</strong></td>
+        <td><span class="badge-panel badge-muted">{{ item.category }}</span></td>
+        <td>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="flex:1;height:6px;background:var(--surface2);border-radius:3px;">
+              <div style="width:{{ item.percentage }}%;height:100%;background:var(--accent);border-radius:3px;"></div>
+            </div>
+            <span style="font-size:12px;color:var(--muted);">{{ item.percentage }}%</span>
+          </div>
+        </td>
+        <td style="color:var(--muted);font-size:12px;">{{ item.icon|default:"—" }}</td>
+        <td><span class="badge-panel badge-muted">{{ item.display_order }}</span></td>
+        <td>
+          <div style="display:flex;gap:8px;">
+            <a href="{% url 'admin_panel:skill-edit' item.pk %}" class="btn-panel btn-secondary-panel btn-sm-panel"><i class="fa-solid fa-pen"></i> Edit</a>
+            <form method="post" action="{% url 'admin_panel:skill-delete' item.pk %}" style="display:inline;" onsubmit="return confirm('Delete?')">
+              {% csrf_token %}<button type="submit" class="btn-panel btn-danger-panel btn-sm-panel"><i class="fa-solid fa-trash"></i></button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state"><i class="fa-solid fa-code"></i>No skills yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

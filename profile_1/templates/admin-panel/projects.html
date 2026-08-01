@@ -1,0 +1,49 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}Projects{% endblock %}
+{% block page_title_header %}Projects{% endblock %}
+{% block nav_projects %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Projects</h2>
+  <a href="{% url 'admin_panel:project-add' %}" class="btn-panel btn-primary-panel"><i class="fa-solid fa-plus"></i> Add Project</a>
+</div>
+<div class="panel-card">
+  {% if items %}
+  <table class="panel-table">
+    <thead>
+      <tr><th>Image</th><th>Title</th><th>Slug</th><th>Featured</th><th>Order</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>
+          {% if item.cover_image %}
+            <img src="{{ item.cover_image.url }}" class="thumbnail-sm" alt="">
+          {% else %}
+            <div style="width:48px;height:48px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;">
+              <i class="fa-solid fa-image" style="color:var(--muted)"></i>
+            </div>
+          {% endif %}
+        </td>
+        <td><strong>{{ item.title }}</strong><br><span style="color:var(--muted);font-size:12px;">{{ item.short_description|truncatechars:50 }}</span></td>
+        <td style="color:var(--muted);font-size:12px;">{{ item.slug }}</td>
+        <td>{% if item.featured %}<span class="badge-panel badge-success">Featured</span>{% else %}<span class="badge-panel badge-muted">No</span>{% endif %}</td>
+        <td><span class="badge-panel badge-muted">{{ item.display_order }}</span></td>
+        <td>
+          <div style="display:flex;gap:8px;">
+            <a href="{% url 'admin_panel:project-edit' item.pk %}" class="btn-panel btn-secondary-panel btn-sm-panel"><i class="fa-solid fa-pen"></i> Edit</a>
+            <form method="post" action="{% url 'admin_panel:project-delete' item.pk %}" style="display:inline;" onsubmit="return confirm('Delete project?')">
+              {% csrf_token %}<button type="submit" class="btn-panel btn-danger-panel btn-sm-panel"><i class="fa-solid fa-trash"></i></button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state"><i class="fa-solid fa-diagram-project"></i>No projects yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}{{ action }} Certificate{% endblock %}
+{% block page_title_header %}{{ action }} Certificate{% endblock %}
+{% block nav_certifications %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>{{ action }} Certificate</h2>
+  <a href="{% url 'admin_panel:certifications' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-arrow-left"></i> Back</a>
+</div>
+<div class="panel-card" style="max-width:620px;">
+  {% if obj and obj.certificate_image %}
+  <div style="margin-bottom:20px;">
+    <img src="{{ obj.certificate_image.url }}" style="max-height:120px;border-radius:10px;object-fit:cover;" alt="">
+  </div>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include "admin-panel/includes/form_fields.html" with form=form %}
+    <button type="submit" class="btn-panel btn-primary-panel"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+  </form>
+</div>
+{% endblock %}

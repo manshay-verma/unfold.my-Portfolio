@@ -1,0 +1,40 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}Education{% endblock %}
+{% block page_title_header %}Education{% endblock %}
+{% block nav_education %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Education</h2>
+  <a href="{% url 'admin_panel:education-add' %}" class="btn-panel btn-primary-panel"><i class="fa-solid fa-plus"></i> Add Entry</a>
+</div>
+<div class="panel-card">
+  {% if items %}
+  <table class="panel-table">
+    <thead>
+      <tr><th>Institute</th><th>Degree</th><th>Years</th><th>Order</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><strong>{{ item.institute }}</strong></td>
+        <td>{{ item.degree }}</td>
+        <td style="color:var(--muted)">{{ item.start_year }} – {{ item.end_year }}</td>
+        <td><span class="badge-panel badge-muted">{{ item.display_order }}</span></td>
+        <td>
+          <div style="display:flex;gap:8px;">
+            <a href="{% url 'admin_panel:education-edit' item.pk %}" class="btn-panel btn-secondary-panel btn-sm-panel"><i class="fa-solid fa-pen"></i> Edit</a>
+            <form method="post" action="{% url 'admin_panel:education-delete' item.pk %}" style="display:inline;" onsubmit="return confirm('Delete?')">
+              {% csrf_token %}<button type="submit" class="btn-panel btn-danger-panel btn-sm-panel"><i class="fa-solid fa-trash"></i></button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state"><i class="fa-solid fa-graduation-cap"></i>No education entries yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

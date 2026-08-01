@@ -1,0 +1,47 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}Experience{% endblock %}
+{% block page_title_header %}Experience{% endblock %}
+{% block nav_experience %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Experience</h2>
+  <a href="{% url 'admin_panel:experience-add' %}" class="btn-panel btn-primary-panel"><i class="fa-solid fa-plus"></i> Add Entry</a>
+</div>
+<div class="panel-card">
+  {% if items %}
+  <table class="panel-table">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Position</th>
+        <th>Duration</th>
+        <th>Order</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><strong>{{ item.company }}</strong></td>
+        <td>{{ item.position }}</td>
+        <td style="color:var(--muted)">{{ item.start_date }} – {{ item.end_date }}</td>
+        <td><span class="badge-panel badge-muted">{{ item.display_order }}</span></td>
+        <td>
+          <div style="display:flex;gap:8px;">
+            <a href="{% url 'admin_panel:experience-edit' item.pk %}" class="btn-panel btn-secondary-panel btn-sm-panel"><i class="fa-solid fa-pen"></i> Edit</a>
+            <form method="post" action="{% url 'admin_panel:experience-delete' item.pk %}" style="display:inline;" onsubmit="return confirm('Delete this entry?')">
+              {% csrf_token %}
+              <button type="submit" class="btn-panel btn-danger-panel btn-sm-panel"><i class="fa-solid fa-trash"></i></button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state"><i class="fa-solid fa-briefcase"></i>No experience entries yet.</div>
+  {% endif %}
+</div>
+{% endblock %}
