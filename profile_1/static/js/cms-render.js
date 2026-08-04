@@ -101,18 +101,42 @@
     }
   }
 
+  function formatDateString(str) {
+    if (!str) return '';
+    var s = String(str).trim();
+    if (s.toLowerCase() === 'present' || s.toLowerCase() === 'current') return 'Present';
+
+    var parts = s.split('-');
+    if (parts.length >= 2) {
+      var year = parts[0];
+      var monthIdx = parseInt(parts[1], 10) - 1;
+      var months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      if (monthIdx >= 0 && monthIdx < 12 && year.length === 4) {
+        return months[monthIdx] + ' ' + year;
+      }
+    }
+    return s;
+  }
+
   /* ── Experience Timeline ───────────────────────────────────────── */
 
   function renderExperience(experience) {
     var container = qs('.about-timelines .col-lg-6:first-child .timeline');
     if (!container || !experience || !experience.length) return;
     container.innerHTML = experience.map(function (exp) {
+      var start = formatDateString(exp.start_date);
+      var end = formatDateString(exp.end_date) || 'Present';
+      var timeRange = start ? (start + ' – ' + end) : end;
+
       return '<div class="timeline__block gsap-reveal">' +
         '<div class="timeline__bullet"></div>' +
         '<div class="timeline__header">' +
         '<h4 class="timeline__title">' + (exp.company || '') + '</h4>' +
         '<h5 class="timeline__meta">' + (exp.position || '') + '</h5>' +
-        '<p class="timeline__timeframe">' + (exp.start_date || '') + ' – ' + (exp.end_date || '') + '</p>' +
+        '<p class="timeline__timeframe">' + timeRange + '</p>' +
         '</div>' +
         '<div class="timeline__desc"><p>' + (exp.description || '') + '</p></div>' +
         '</div>';
@@ -125,12 +149,16 @@
     var container = qs('.about-timelines .col-lg-6:last-child .timeline');
     if (!container || !education || !education.length) return;
     container.innerHTML = education.map(function (edu) {
+      var start = formatDateString(edu.start_year);
+      var end = formatDateString(edu.end_year) || 'Present';
+      var timeRange = start ? (start + ' – ' + end) : end;
+
       return '<div class="timeline__block gsap-reveal">' +
         '<div class="timeline__bullet"></div>' +
         '<div class="timeline__header">' +
         '<h4 class="timeline__title">' + (edu.institute || '') + '</h4>' +
         '<h5 class="timeline__meta">' + (edu.degree || '') + '</h5>' +
-        '<p class="timeline__timeframe">' + (edu.start_year || '') + ' – ' + (edu.end_year || '') + '</p>' +
+        '<p class="timeline__timeframe">' + timeRange + '</p>' +
         '</div>' +
         '<div class="timeline__desc"><p>' + (edu.description || '') + '</p></div>' +
         '</div>';
