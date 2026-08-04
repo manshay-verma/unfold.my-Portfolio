@@ -1,6 +1,8 @@
 import os
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 
 # ──────────────────────────────────────────
@@ -12,8 +14,8 @@ class Experience(models.Model):
     position = models.CharField(max_length=200)
     location = models.CharField(max_length=150, blank=True)
 
-    start_date = models.CharField(max_length=30)
-    end_date = models.CharField(max_length=30)
+    start_date = models.CharField(max_length=30, default="", blank=True)
+    end_date = models.CharField(max_length=30, default="", blank=True)
 
     description = models.TextField()
 
@@ -32,8 +34,8 @@ class Education(models.Model):
     institute = models.CharField(max_length=250)
     degree = models.CharField(max_length=250)
 
-    start_year = models.CharField(max_length=10)
-    end_year = models.CharField(max_length=10)
+    start_year = models.CharField(max_length=10, default="", blank=True)
+    end_year = models.CharField(max_length=10, default="", blank=True)
 
     percentage = models.CharField(max_length=20, blank=True)
 
@@ -128,6 +130,7 @@ SKILL_CATEGORY_CHOICES = [
 class Skill(models.Model):
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=50, choices=SKILL_CATEGORY_CHOICES)
+    description = models.TextField(blank=True)
     percentage = models.PositiveIntegerField(default=0, help_text="0–100")
     icon = models.CharField(max_length=100, blank=True, help_text="Icon class name, e.g. icon-cogs")
     display_order = models.PositiveIntegerField(default=0)
@@ -176,7 +179,7 @@ class ProjectImage(models.Model):
 class Certification(models.Model):
     title = models.CharField(max_length=300)
     issuer = models.CharField(max_length=200)
-    issue_date = models.CharField(max_length=50)
+    issue_date = models.CharField(max_length=50, default="", blank=True)
     certificate_image = models.ImageField(upload_to="certificates/", blank=True, null=True)
     certificate_url = models.URLField(blank=True)
     display_order = models.PositiveIntegerField(default=0)
@@ -252,3 +255,28 @@ class SEO(SingletonModel):
 
     def __str__(self):
         return "SEO Settings"
+class Journal(models.Model):
+    title = models.CharField(max_length=300)
+    slug = models.SlugField(max_length=300, unique=True, blank=True)
+    author = models.CharField(max_length=100, default='Admin')
+    read_time = models.CharField(max_length=50, help_text='e.g., 5 mins read')
+    publish_date = models.DateField(default=timezone.now, blank=True, null=True, help_text='Publication Date')
+    image = models.ImageField(upload_to='journal/', blank=True, null=True)
+    excerpt = models.TextField(help_text='Short description for the popup preview')
+    content = RichTextField(help_text='Full article content')
+    external_urls = models.JSONField(default=list, blank=True, help_text='List of external links e.g. [{"title": "Medium", "url": "https://..."}]')
+    display_order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Journal"
+        verbose_name_plural = "Journals"
+        ordering = ['display_order', '-created_at']
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)

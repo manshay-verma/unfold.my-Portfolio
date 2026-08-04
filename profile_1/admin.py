@@ -1,19 +1,21 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
 from .models import (
     Experience, Education,
     Hero, About, Skill, Project, ProjectImage,
     Certification, Resume, Contact, SocialLink, SEO,
+    Journal
 )
 
 
 @admin.register(Experience)
-class ExperienceAdmin(admin.ModelAdmin):
+class ExperienceAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("company", "position", "start_date", "end_date", "display_order")
     ordering = ("display_order",)
 
 
 @admin.register(Education)
-class EducationAdmin(admin.ModelAdmin):
+class EducationAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("institute", "degree", "start_year", "end_year", "display_order")
     ordering = ("display_order",)
 
@@ -29,7 +31,7 @@ class AboutAdmin(admin.ModelAdmin):
 
 
 @admin.register(Skill)
-class SkillAdmin(admin.ModelAdmin):
+class SkillAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("name", "category", "percentage", "display_order")
     list_filter = ("category",)
     ordering = ("display_order",)
@@ -41,7 +43,7 @@ class ProjectImageInline(admin.TabularInline):
 
 
 @admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
+class ProjectAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("title", "slug", "featured", "display_order")
     prepopulated_fields = {"slug": ("title",)}
     inlines = [ProjectImageInline]
@@ -49,7 +51,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 @admin.register(Certification)
-class CertificationAdmin(admin.ModelAdmin):
+class CertificationAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("title", "issuer", "issue_date", "display_order")
     ordering = ("display_order",)
 
@@ -65,7 +67,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 @admin.register(SocialLink)
-class SocialLinkAdmin(admin.ModelAdmin):
+class SocialLinkAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("platform", "url", "display_order")
     ordering = ("display_order",)
 
@@ -73,3 +75,9 @@ class SocialLinkAdmin(admin.ModelAdmin):
 @admin.register(SEO)
 class SEOAdmin(admin.ModelAdmin):
     list_display = ("site_title", "keywords")
+
+@admin.register(Journal)
+class JournalAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ('title', 'author', 'created_at', 'display_order')
+    prepopulated_fields = {'slug': ('title',)}
+    ordering = ('display_order',)

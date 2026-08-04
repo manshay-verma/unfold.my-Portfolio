@@ -3,6 +3,7 @@ from .models import (
     Experience, Education,
     Hero, About, Skill, Project, ProjectImage,
     Certification, Resume, Contact, SocialLink, SEO,
+    Journal
 )
 
 
@@ -79,3 +80,8 @@ class SEOSerializer(serializers.ModelSerializer):
     class Meta:
         model = SEO
         fields = "__all__"
+
+class JournalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Journal
+        fields = '__all__'

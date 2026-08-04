@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "profile_1",
-    "rest_framework"
+    "rest_framework",
+    "adminsortable2",
+    "ckeditor",
 ]
 
 MIDDLEWARE = [

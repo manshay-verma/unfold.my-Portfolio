@@ -83,3 +83,63 @@
   margin-bottom: 20px;
   color: #fff;
 }
+/* --- Certifications Card V2 --- */
+.cert-card-v2 {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: 0.3s all ease;
+  height: 100%;
+}
+.cert-card-v2:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #D63447;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+.cert-card-v2 .cert-icon-wrap {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+.cert-card-v2 .cert-icon-wrap img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+.cert-card-v2 .cert-icon-wrap i {
+  font-size: 50px;
+  color: #D63447;
+}
+.cert-card-v2 h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #fff;
+}
+.cert-card-v2 p.cert-meta {
+  font-size: 14px;
+  color: #8892a4;
+  margin-bottom: 30px;
+}
+.cert-card-v2 a.cert-btn {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 12px 28px;
+  border: 1px solid #D63447;
+  color: #D63447;
+  border-radius: 40px;
+  transition: 0.3s all ease;
+  text-decoration: none;
+}
+.cert-card-v2 a.cert-btn:hover {
+  background: #D63447;
+  color: #fff;
+}

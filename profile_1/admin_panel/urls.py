@@ -36,4 +36,8 @@ urlpatterns = [
     path("social/<int:pk>/edit/",   views.social_edit,   name="social-edit"),
     path("social/<int:pk>/delete/", views.social_delete, name="social-delete"),
     path("seo/",               views.seo_edit,            name="seo"),
+    path("journal/", views.journal_list, name="journals"),
+    path("journal/add/", views.journal_add, name="journal-add"),
+    path("journal/<int:pk>/edit/", views.journal_edit, name="journal-edit"),
+    path("journal/<int:pk>/delete/", views.journal_delete, name="journal-delete"),
 ]

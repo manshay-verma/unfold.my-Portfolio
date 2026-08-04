@@ -1,0 +1,194 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <title>{{ journal.title }} &mdash; Journal</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="{{ journal.excerpt }}">
+  <meta name="keywords" content="">
+  <meta name="author" content="{{ journal.author }}">
+  <link rel="stylesheet" href="{% static 'css/vendor/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendor/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendor/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendor/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendor/jquery.fancybox.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body data-spy="scroll" data-target=".site-nav-target" data-offset="200">
+
+    <nav class="unslate_co--site-mobile-menu">
+      <div class="close-wrap d-flex">
+        <a href="#" class="d-flex ml-auto js-menu-toggle">
+          <span class="close-label">Close</span>
+          <div class="close-times">
+            <span class="bar1"></span>
+            <span class="bar2"></span>
+          </div>
+        </a>
+      </div>
+      <div class="site-mobile-inner"></div>
+    </nav>
+
+
+    <div class="unslate_co--site-wrap">
+
+      <div class="unslate_co--site-inner">
+
+        <div class="lines-wrap">
+          <div class="lines-inner">
+            <div class="lines"></div>
+          </div>
+        </div>
+        <!-- END lines -->
+      
+      <nav class="unslate_co--site-nav site-nav-target">
+
+        <div class="container">
+        
+          <div class="row align-items-center justify-content-between text-left">
+            <div class="col-md-5 text-right">
+              <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
+                <li class="has-children">
+                  <a href="base.html#home-section" class="nav-link">Home</a>
+                  <ul class="dropdown">
+                    <li>
+                      <a href="base.html">Hero Image BG</a>
+                    </li>
+                    <li>
+                      <a href="index-video.html">Video BG</a>
+                    </li>
+                    <li>
+                      <a href="index-hero-slider.html">Hero Slider</a>
+                    </li>
+                    <li>
+                      <a href="index-sidebar-menu.html">Sidebar Menu</a>
+                    </li>
+                    <li>
+                      <a href="index-right-menu.html">Right Menu</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="base.html#portfolio-section" class="nav-link">Portfolio</a></li>
+                <li><a href="base.html#about-section" class="nav-link">About</a></li>
+                <li><a href="base.html#services-section" class="nav-link">Services</a></li>
+              </ul>
+            </div>
+            <div class="site-logo pos-absolute">
+              <a href="base.html" class="unslate_co--site-logo">Unfold<span>.</span></a>
+            </div>
+            <div class="col-md-5 text-right text-lg-left">
+              <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
+                <li><a href="base.html#skills-section" class="nav-link">Skills</a></li>
+                <li><a href="base.html#journal-section" class="nav-link active">Journal</a></li>
+                <li><a href="base.html#contact-section" class="nav-link">Contact</a></li>
+              </ul>
+
+              <ul class="site-nav-ul-none-onepage text-right d-inline-block d-lg-none">
+                <li><a href="#" class="js-menu-toggle">Menu</a></li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+      </nav>
+      <!-- END nav -->
+
+      <div class="cover-v1 jarallax overlay" style="background-image: url('{% if journal.image %}{{ journal.image.url }}{% else %}{% static 'images/work_1_full.jpg' %}{% endif %}');">
+        <div class="container">
+          <div class="row align-items-center">
+              
+            <div class="col-md-8 mx-auto text-center">
+              <h1 class="blog-heading" data-aos="fade-up" data-aos-delay="0">{{ journal.title }}</h1>
+              <div class="post-meta" data-aos="fade-up" data-aos-delay="100">By {{ journal.author }} on {% if journal.publish_date %}{{ journal.publish_date|date:"F d, Y" }}{% else %}{{ journal.created_at|date:"F d, Y" }}{% endif %} &bullet; {{ journal.read_time }}</div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- dov -->
+        <a href="#blog-single-section" class="mouse-wrap smoothscroll">
+          <span class="mouse">
+            <span class="scroll"></span>
+          </span>
+          <span class="mouse-label">Scroll</span>
+        </a>
+
+      </div>
+      <!-- END .cover-v1 -->
+
+      <div class="unslate_co--section" id="blog-single-section">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-7">
+              {{ journal.content|safe }}
+
+              {% if journal.external_urls %}
+                <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                  <h4 style="font-size: 16px; color: #fff; margin-bottom: 15px; font-weight: 600;">Related Links / External Resources</h4>
+                  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    {% for link in journal.external_urls %}
+                      <a href="{{ link.url }}" target="_blank" class="btn btn-outline-light btn-sm" style="border-radius: 20px; padding: 6px 16px; font-size: 13px; font-weight: 500;">
+                        <i class="icon-link"></i> {{ link.title|default:"Link" }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      </div> 
+
+      <footer class="unslate_co--footer unslate_co--section">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-7">
+              
+              <div class="footer-site-logo"><a href="#">Unfold<span>.</span></a></div>
+
+              <ul class="footer-site-social">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">Dribbble</a></li>
+                <li><a href="#">Behance</a></li>
+              </ul>
+
+              <p class="site-copyright">
+                
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script> All rights reserved | This template is made with <i class="icon-heart"
+                  aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      
+    </div>
+
+    <!-- Loader -->
+    <div id="unslate_co--overlayer"></div>
+    <div class="site-loader-wrap">
+      <div class="site-loader"></div>
+    </div>
+
+    <script src="js/scripts-dist.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+</html>

@@ -141,38 +141,68 @@ class Command(BaseCommand):
     # ── Skills ──────────────────────────────────────────────────────────
     def _seed_skills(self):
         skills = [
-            # Backend
-            ("Python",     "Backend", 92, "icon-cogs",      0),
-            ("Django",     "Backend", 90, "icon-cogs",      1),
-            ("FastAPI",    "Backend", 85, "icon-cogs",      2),
-            ("Flask",      "Backend", 82, "icon-cogs",      3),
-            ("DRF",        "Backend", 88, "icon-cogs",      4),
-            ("REST APIs",  "Backend", 90, "icon-cogs",      5),
-            # Cloud / DevOps
-            ("AWS",            "Cloud", 78, "icon-cloud",  10),
-            ("Docker",         "DevOps", 85, "icon-cloud", 11),
-            ("Kubernetes",     "DevOps", 70, "icon-cloud", 12),
-            ("GitHub Actions", "DevOps", 80, "icon-cloud", 13),
-            ("Linux",          "DevOps", 85, "icon-cloud", 14),
-            # AI / ML
-            ("TensorFlow",  "ML", 75, "icon-lightbulb-o", 20),
-            ("PyTorch",     "ML", 72, "icon-lightbulb-o", 21),
-            ("Scikit-learn","ML", 80, "icon-lightbulb-o", 22),
-            ("CNNs",        "AI", 70, "icon-lightbulb-o", 23),
-            ("Pandas",      "ML", 88, "icon-lightbulb-o", 24),
-            # Database
-            ("PostgreSQL", "Database", 85, "icon-database", 30),
-            ("MongoDB",    "Database", 80, "icon-database", 31),
-            ("Redis",      "Database", 72, "icon-database", 32),
-            ("MySQL",      "Database", 82, "icon-database", 33),
+            {
+                "name": "Python & Backend Engineering",
+                "category": "Backend",
+                "description": "Django, DRF, FastAPI, Flask, GraphQL, Microservices Architecture, RESTful APIs, Celery.",
+                "percentage": 92,
+                "icon": "fa-brands fa-python",
+                "display_order": 1,
+            },
+            {
+                "name": "Agentic AI & LLM Systems",
+                "category": "AI",
+                "description": "LangGraph, LangChain, CrewAI, RAG Pipelines, Multi-Agent Workflows, Context Recall & Semantic Chunking.",
+                "percentage": 88,
+                "icon": "fa-solid fa-brain",
+                "display_order": 2,
+            },
+            {
+                "name": "Machine Learning & Analytics",
+                "category": "ML",
+                "description": "TensorFlow, PyTorch, Pandas, NumPy, Plotly Dash, Streamlit, Predictive Analytics.",
+                "percentage": 85,
+                "icon": "fa-solid fa-chart-line",
+                "display_order": 3,
+            },
+            {
+                "name": "Cloud Infrastructure (AWS)",
+                "category": "Cloud",
+                "description": "AWS (EC2, S3, Lambda, RDS, Aurora, DynamoDB, VPC, IAM, Route 53, CloudFormation, ELB, Auto Scaling, CloudWatch, CloudFront, Athena).",
+                "percentage": 85,
+                "icon": "fa-brands fa-aws",
+                "display_order": 4,
+            },
+            {
+                "name": "Databases & Vector Search",
+                "category": "Database",
+                "description": "PostgreSQL, SQLite, MongoDB Atlas, MySQL, ChromaDB, Weaviate, Redis.",
+                "percentage": 90,
+                "icon": "fa-solid fa-database",
+                "display_order": 5,
+            },
+            {
+                "name": "DevOps, CI/CD & Automation",
+                "category": "DevOps",
+                "description": "Docker, Docker Compose, Linux Server Management, Shell Scripting, CI/CD Pipelines, Sumo Logic, Jira, Confluence.",
+                "percentage": 82,
+                "icon": "fa-brands fa-docker",
+                "display_order": 6,
+            },
+            {
+                "name": "Programming & CS Fundamentals",
+                "category": "Backend",
+                "description": "Python, C++, Data Structures & Algorithms, Object-Oriented Design, Distributed Systems.",
+                "percentage": 90,
+                "icon": "fa-solid fa-code",
+                "display_order": 7,
+            },
         ]
-        for name, cat, pct, icon, order in skills:
-            _, created = Skill.objects.get_or_create(
-                name=name, category=cat,
-                defaults={"percentage": pct, "icon": icon, "display_order": order},
-            )
-            if created:
-                self.stdout.write(f"  Skill: {name} seeded.")
+        
+        Skill.objects.all().delete()
+        for sk in skills:
+            Skill.objects.create(**sk)
+            self.stdout.write(f"  Skill: {sk['name']} seeded.")
 
     # ── Projects ────────────────────────────────────────────────────────
     def _seed_projects(self):
@@ -180,7 +210,20 @@ class Command(BaseCommand):
             {
                 "title": "Vi Telecom Analytics",
                 "short_description": "Enterprise Backend, Data Engineering",
-                "description": "Enterprise analytics system for Vi Telecom with scalable data pipelines and backend APIs.",
+                "description": """<p>Built a large-scale telecom analytics and backend automation system using FastAPI, Pandas, Shell Scripting, and Linux-based server environments. Automated enterprise workflows for data ingestion, transformation, formula-based calculations, network analytics, and reporting pipelines while improving operational efficiency and reducing manual processing time.</p>
+<h4 class="mb-3" style="color: #fff; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; margin-top: 20px;">Key Highlights</h4>
+<ul class="highlight-list">
+  <li>FastAPI backend services</li>
+  <li>Telecom analytics workflows</li>
+  <li>Large-scale data ingestion</li>
+  <li>Linux server automation</li>
+  <li>Shell scripting</li>
+  <li>Remote server management</li>
+  <li>CRUD utilities</li>
+  <li>GitLab CI/CD workflows</li>
+  <li>Production deployment handling</li>
+  <li>PostgreSQL & SQLite optimization</li>
+</ul>""",
                 "tech_stack": ["Python", "Django", "PostgreSQL", "PySpark", "AWS"],
                 "featured": True,
                 "display_order": 0,
@@ -188,7 +231,14 @@ class Command(BaseCommand):
             {
                 "title": "Harman Studio Cloud",
                 "short_description": "Cloud Infrastructure, SaaS Backend",
-                "description": "Cloud-native SaaS backend platform for Harman Studio with multi-tenant architecture.",
+                "description": """<p>Architected and developed a multi-tenant SaaS cloud infrastructure for professional audio studios using FastAPI, GraphQL, and AWS services. Built scalable backend systems to handle complex studio management workflows.</p>
+<h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Highlights</h4>
+<ul class="highlight-list mb-4">
+  <li>Multi-tenant SaaS architecture</li>
+  <li>AWS Lambda Serverless</li>
+  <li>FastAPI & GraphQL APIs</li>
+  <li>Terraform (IaC)</li>
+</ul>""",
                 "tech_stack": ["Python", "FastAPI", "AWS", "Docker", "Kubernetes"],
                 "featured": True,
                 "display_order": 1,
@@ -196,7 +246,18 @@ class Command(BaseCommand):
             {
                 "title": "BMP Book",
                 "short_description": "Mobile App, Real-Time Platform",
-                "description": "Real-time booking platform with mobile app backend and live availability tracking.",
+                "description": """<p>Developed a scalable full-stack booking platform connecting users with verified pandits through real-time communication systems, geolocation services, and cloud-based infrastructure using React Native, Django REST Framework, Redis, and AWS integrations.</p>
+<h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
+<ul class="highlight-list">
+  <li>React Native mobile app</li>
+  <li>DRF backend APIs</li>
+  <li>AWS SNS & SQS integrations</li>
+  <li>Redis caching</li>
+  <li>Geolocation & maps</li>
+  <li>Real-time notifications</li>
+  <li>Booking workflows</li>
+  <li>Elasticsearch search systems</li>
+</ul>""",
                 "tech_stack": ["Django", "WebSockets", "PostgreSQL", "Redis"],
                 "featured": False,
                 "display_order": 2,
@@ -204,7 +265,18 @@ class Command(BaseCommand):
             {
                 "title": "Smart Activity Tracker",
                 "short_description": "AI, Desktop App, Computer Vision",
-                "description": "AI-powered desktop application using computer vision to track and analyze user activity.",
+                "description": """<p>Developed a desktop monitoring and activity analysis application using Qt and OpenCV for capturing and processing detailed information from active desktop windows.</p>
+<h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
+<ul class="highlight-list">
+  <li>Active window tracking</li>
+  <li>Dynamic screen analysis</li>
+  <li>OpenCV image processing</li>
+  <li>OCR integration</li>
+  <li>Edge recognition</li>
+  <li>Local secure processing</li>
+  <li>Responsive PyQt5 UI</li>
+  <li>Workflow analysis</li>
+</ul>""",
                 "tech_stack": ["Python", "TensorFlow", "OpenCV", "PyQt5"],
                 "featured": False,
                 "display_order": 3,
@@ -212,7 +284,18 @@ class Command(BaseCommand):
             {
                 "title": "Text Analysis System",
                 "short_description": "Automation, NLP, Data Processing",
-                "description": "Web scraping and NLP-based text analysis system for automated data extraction and insights.",
+                "description": """<p>Built a Python-based automation system for extracting article data from URLs and performing advanced text-analysis workflows. The system implements robust extraction pipelines using BeautifulSoup and Requests.</p>
+<h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
+<ul class="highlight-list">
+  <li>Automated article extraction</li>
+  <li>Readability analysis</li>
+  <li>Sentiment analysis</li>
+  <li>Excel automation</li>
+  <li>Broken URL management</li>
+  <li>Natural Language Processing</li>
+  <li>Structured data output</li>
+  <li>Error handling & logging</li>
+</ul>""",
                 "tech_stack": ["Python", "Scrapy", "NLTK", "spaCy", "Elasticsearch"],
                 "featured": False,
                 "display_order": 4,
@@ -220,19 +303,33 @@ class Command(BaseCommand):
             {
                 "title": "MUSLEEASE E-Commerce",
                 "short_description": "Full-Stack, MERN E-Commerce",
-                "description": "Full-stack e-commerce platform built with MERN stack featuring cart, payments, and admin panel.",
+                "description": """<p>Built a comprehensive MERN-stack e-commerce platform for gym and lifestyle products. The platform features a scalable backend and highly responsive shopping workflows designed for a premium user experience.</p>
+<h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
+<ul class="highlight-list">
+  <li>Authentication system</li>
+  <li>Cart & checkout workflows</li>
+  <li>Payment integration</li>
+  <li>Product reviews</li>
+  <li>Admin dashboard</li>
+  <li>Password recovery</li>
+  <li>Cloudinary image storage</li>
+  <li>Email notification systems</li>
+</ul>""",
                 "tech_stack": ["React", "Node.js", "MongoDB", "Express", "Stripe"],
                 "featured": False,
                 "display_order": 5,
             },
         ]
         for p in projects:
-            _, created = Project.objects.get_or_create(
-                title=p["title"],
+            title = p.pop("title")
+            _, created = Project.objects.update_or_create(
+                title=title,
                 defaults=p,
             )
             if created:
-                self.stdout.write(f"  Project: {p['title']} seeded.")
+                self.stdout.write(f"  Project: {title} seeded.")
+            else:
+                self.stdout.write(f"  Project: {title} updated.")
 
     # ── Contact ─────────────────────────────────────────────────────────
     def _seed_contact(self):

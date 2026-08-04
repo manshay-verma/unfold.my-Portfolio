@@ -11,12 +11,12 @@ from django.contrib import messages
 from profile_1.models import (
     Hero, About, Skill, Project, ProjectImage,
     Certification, Resume, Contact, SocialLink, SEO,
-    Experience, Education,
+    Experience, Education, Journal
 )
 from .forms import (
     HeroForm, AboutForm, SkillForm, ProjectForm,
     CertificationForm, ResumeForm, ContactForm,
-    SocialLinkForm, SEOForm, ExperienceForm, EducationForm,
+    SocialLinkForm, SEOForm, ExperienceForm, EducationForm, JournalForm
 )
 
 
@@ -438,3 +438,45 @@ def seo_edit(request):
     else:
         form = SEOForm(instance=obj)
     return render(request, "admin-panel/seo.html", {"form": form, "obj": obj})
+
+# ── JOURNALS ─────────────────────────────────────────────────────────────
+
+@staff_required
+def journal_list(request):
+    items = Journal.objects.all()
+    return render(request, "admin-panel/journals.html", {"items": items})
+
+@staff_required
+def journal_add(request):
+    if request.method == "POST":
+        form = JournalForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Journal added.")
+            return redirect("admin_panel:journals")
+    else:
+        form = JournalForm()
+    return render(request, "admin-panel/journal_form.html", {"form": form, "action": "Add"})
+
+@staff_required
+def journal_edit(request, pk):
+    obj = get_object_or_404(Journal, pk=pk)
+    if request.method == "POST":
+        form = JournalForm(request.POST, request.FILES, instance=obj)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Journal updated.")
+            return redirect("admin_panel:journals")
+    else:
+        form = JournalForm(instance=obj)
+    return render(request, "admin-panel/journal_form.html", {"form": form, "action": "Edit", "obj": obj})
+
+@staff_required
+def journal_delete(request, pk):
+    obj = get_object_or_404(Journal, pk=pk)
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, "Journal deleted.")
+        return redirect("admin_panel:journals")
+    return render(request, "admin-panel/confirm_delete.html", {"obj": obj, "cancel_url": "admin_panel:journals"})
+

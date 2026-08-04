@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -6,13 +6,13 @@ from rest_framework.response import Response
 from .models import (
     Experience, Education,
     Hero, About, Skill, Project,
-    Certification, Resume, Contact, SocialLink, SEO,
+    Certification, Resume, Contact, SocialLink, SEO, Journal
 )
 from .serializers import (
     ExperienceSerializer, EducationSerializer,
     HeroSerializer, AboutSerializer, SkillSerializer, ProjectSerializer,
     CertificationSerializer, ResumeSerializer, ContactSerializer,
-    SocialLinkSerializer, SEOSerializer,
+    SocialLinkSerializer, SEOSerializer, JournalSerializer
 )
 
 
@@ -159,6 +159,9 @@ class PortfolioAPIView(APIView):
                 SocialLink.objects.all(), many=True, context=ctx
             ).data,
             "seo": SEOSerializer(SEO.load(), context=ctx).data,
+            "journals": JournalSerializer(
+                Journal.objects.all(), many=True, context=ctx
+            ).data,
         }
         return Response(data)
 
@@ -171,5 +174,12 @@ def home(request):
     return render(request, 'portfolio/base.html')
 
 
+from django.shortcuts import get_object_or_404
+
 def portfolio_single(request, name):
-    return render(request, f'portfolio/{name}.html')
+    project = get_object_or_404(Project, slug=name)
+    return render(request, 'portfolio/portfolio-single.html', {'project': project})
+
+def journal_single(request, slug):
+    journal = get_object_or_404(Journal, slug=slug)
+    return render(request, 'portfolio/journal-single.html', {'journal': journal})

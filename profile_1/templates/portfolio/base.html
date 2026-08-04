@@ -24,6 +24,16 @@
     <link rel="stylesheet" href="{% static 'css/hero-animation.css' %}">
     <link rel="stylesheet" href="{% static 'css/portfolio-projects.css' %}">
     {% block extra_css %}{% endblock %}
+    <style>
+      .journal-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(124, 106, 245, 0.4) !important;
+        box-shadow: 0 12px 30px rgba(124, 106, 245, 0.18) !important;
+      }
+      .journal-card:hover .journal-card-img {
+        transform: scale(1.06);
+      }
+    </style>
 
   </head>
   <body data-spy="scroll" data-target=".site-nav-target" data-offset="200">
@@ -81,7 +91,7 @@
                   </ul>
                 </li>
                 <li><a href="#about-section" class="nav-link">About</a></li>
-                <li><a href="#portfolio-section" class="nav-link">Portfolio</a></li>
+                <li><a href="#portfolio-section" class="nav-link">Projects</a></li>
               </ul>
             </div>
             <div class="site-logo pos-absolute">
@@ -178,6 +188,20 @@
 
       <div class="unslate_co--section">
         <div class="container">
+          <style>
+            .logo-slider .logo-v1 {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 80px; /* Fixed height container */
+            }
+            .logo-slider .logo-v1 img {
+              max-height: 100%;
+              width: auto !important; /* Override owl carousel 100% width */
+              max-width: 180px;
+              object-fit: contain;
+            }
+          </style>
           <div class="owl-carousel logo-slider">
             <div class="logo-v1 gsap-reveal">
               <img src="{% static 'images/logo-google.png' %}" alt="Image" class="img-fluid">
@@ -431,58 +455,19 @@
 
 
       <style>
-        .skill-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 15px;
-          padding: 30px;
+        .skill-percentage-bar {
+          width: 100%;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          margin-top: 12px;
+          overflow: hidden;
+        }
+        .skill-percentage-fill {
           height: 100%;
-          transition: all 0.3s ease;
-        }
-        .skill-card:hover {
-          transform: translateY(-10px);
-          background: rgba(255, 255, 255, 0.05);
-          border-color: rgba(255, 255, 255, 0.2);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        .skill-card .icon-wrap {
-          font-size: 40px;
-          margin-bottom: 20px;
-          display: inline-block;
-          color: #fff;
-        }
-        .skill-card h3 {
-          font-size: 20px;
-          margin-bottom: 15px;
-          font-weight: 700;
-          color: #fff;
-        }
-        .skill-card p {
-          font-size: 14px;
-          line-height: 1.6;
-          color: #aaa;
-          margin-bottom: 20px;
-        }
-        .tech-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-        .tech-tag {
-          background: rgba(255, 255, 255, 0.08);
-          color: #fff;
-          padding: 5px 12px;
-          border-radius: 50px;
-          font-size: 11px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          transition: all 0.2s ease;
-        }
-        .tech-tag:hover {
-          background: #fff;
-          color: #000;
+          background: #D63447;
+          border-radius: 10px;
+          transition: width 0.6s ease;
         }
       </style>
 
@@ -493,112 +478,25 @@
             <span class="gsap-reveal"><img src="{% static 'images/divider.png' %}" alt="divider" width="76"></span>
           </div>
 
-          <div class="row gutter-v4">
-            
-            <!-- Backend -->
-            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
-              <div class="skill-card">
-                <div class="icon-wrap"><span class="icon-cogs"></span></div>
-                <h3>Backend Systems</h3>
-                <p>Building scalable, performance-focused architectures with a focus on clean code and production reliability.</p>
-                <div class="tech-tags">
-                  <span class="tech-tag">Python</span>
-                  <span class="tech-tag">Django</span>
-                  <span class="tech-tag">FastAPI</span>
-                  <span class="tech-tag">Flask</span>
-                  <span class="tech-tag">DRF</span>
-                  <span class="tech-tag">REST APIs</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Cloud & DevOps -->
-            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
-              <div class="skill-card">
-                <div class="icon-wrap"><span class="icon-cloud"></span></div>
-                <h3>Cloud & DevOps</h3>
-                <p>Managing cloud-native infrastructure with automated CI/CD pipelines and containerized deployments.</p>
-                <div class="tech-tags">
-                  <span class="tech-tag">AWS</span>
-                  <span class="tech-tag">Docker</span>
-                  <span class="tech-tag">Kubernetes</span>
-                  <span class="tech-tag">GitHub Actions</span>
-                  <span class="tech-tag">Linux</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ML & AI -->
-            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
-              <div class="skill-card">
-                <div class="icon-wrap"><span class="icon-lightbulb-o"></span></div>
-                <h3>AI & Machine Learning</h3>
-                <p>Developing intelligent models and predictive systems using modern deep learning and data processing techniques.</p>
-                <div class="tech-tags">
-                  <span class="tech-tag">TensorFlow</span>
-                  <span class="tech-tag">PyTorch</span>
-                  <span class="tech-tag">Scikit-learn</span>
-                  <span class="tech-tag">CNNs</span>
-                  <span class="tech-tag">Pandas</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Data Engineering -->
-            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
-              <div class="skill-card">
-                <div class="icon-wrap"><span class="icon-bar-chart"></span></div>
-                <h3>Data Engineering</h3>
-                <p>Designing robust ETL pipelines and transforming raw data into actionable insights through analytics.</p>
-                <div class="tech-tags">
-                  <span class="tech-tag">PySpark</span>
-                  <span class="tech-tag">SQL</span>
-                  <span class="tech-tag">ETL</span>
-                  <span class="tech-tag">Streamlit</span>
-                  <span class="tech-tag">Plotly Dash</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Databases -->
-            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
-              <div class="skill-card">
-                <div class="icon-wrap"><span class="icon-database"></span></div>
-                <h3>System Design</h3>
-                <p>Architecting database solutions for high-performance applications with optimized query handling.</p>
-                <div class="tech-tags">
-                  <span class="tech-tag">PostgreSQL</span>
-                  <span class="tech-tag">MongoDB</span>
-                  <span class="tech-tag">Redis</span>
-                  <span class="tech-tag">MySQL</span>
-                  <span class="tech-tag">SQLite</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Workflow -->
-            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
-              <div class="skill-card">
-                <div class="icon-wrap"><span class="icon-git"></span></div>
-                <h3>Engineering Workflow</h3>
-                <p>Following industry best practices for collaborative development, testing, and documentation.</p>
-                <div class="tech-tags">
-                  <span class="tech-tag">Git</span>
-                  <span class="tech-tag">Postman</span>
-                  <span class="tech-tag">Swagger</span>
-                  <span class="tech-tag">Jira</span>
-                  <span class="tech-tag">Agile</span>
-                </div>
-              </div>
-            </div>
-
+          <div class="row gutter-v3">
+            <!-- Skills are dynamically injected by cms-render.js here -->
           </div>
         </div>
       </div>
       <!-- END .counter -->
 
-
-
+      <div class="unslate_co--section">
+        <div class="container">
+          <div class="section-heading-wrap text-center mb-5">
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Certifications</span></h2>
+            <span class="gsap-reveal"><img src="{% static 'images/divider.png' %}" alt="divider" width="76"></span>
+          </div>
+          
+          <div class="row gutter-v3 certifications-row">
+            <!-- Certifications dynamically injected by cms-render.js here -->
+          </div>
+        </div>
+      </div>
       <div class="unslate_co--section" id="journal-section">
         <div class="container">
           <div class="section-heading-wrap text-center mb-5">
@@ -607,75 +505,31 @@
           </div>
 
           
-          <div class="row gutter-v4 align-items-stretch">
-            <div class="col-sm-6 col-md-6 col-lg-8 blog-post-entry" data-aos="fade-up" data-aos-delay="0">
-
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_1.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-
-
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="100">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_2.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-            </div>
-
-
-            <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="0">
-
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_3.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-
-
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="100">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_4.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-            </div>
-
-            <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="200">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_5.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-            </div>
-
-
+          <div class="row gutter-v4 align-items-stretch" id="journal-row">
+            <!-- Journal items dynamically injected by cms-render.js -->
           </div>
-
+        </div>
+      </div>
+      
+      <!-- Journal Preview Modal -->
+      <div class="modal fade" id="journalModal" tabindex="-1" role="dialog" aria-hidden="true" style="backdrop-filter: blur(5px);">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content" style="background-color: #111; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
+            <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <h5 class="modal-title" id="journalModalTitle" style="color: #fff; font-weight: 600;">Journal Preview</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff; opacity: 0.8;">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body p-0">
+              <div id="journalModalImageContainer" style="width: 100%; height: 250px; background-size: cover; background-position: center; border-bottom: 1px solid rgba(255,255,255,0.1);"></div>
+              <div class="p-4">
+                <p id="journalModalMeta" style="font-size: 12px; color: #D63447; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px;"></p>
+                <p id="journalModalExcerpt" style="color: #8892a4; font-size: 15px; line-height: 1.6; margin-bottom: 25px;"></p>
+                <a href="#" id="journalModalReadMoreBtn" class="btn btn-primary" style="background: #D63447; border: none; padding: 10px 25px; border-radius: 30px; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">Read Full Article</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- END blog posts -->
@@ -788,7 +642,7 @@
     <script src="{% static 'js/scripts-dist.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/hero-animation.js' %}"></script>
-    <script src="{% static 'js/cms-render.js' %}"></script>
+    <script src="{% static 'js/cms-render.js' %}?v=2"></script>
 
   </body>
 </html>

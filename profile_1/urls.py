@@ -19,7 +19,8 @@ urlpatterns = [
 
     # ── Public portfolio frontend ──────────────────────────────────────────────
     path("", v.home, name="home"),
-    path("portfolio-single/<str:name>/", v.portfolio_single, name="portfolio_single"),
+    path("portfolio-single/<slug:name>/", v.portfolio_single, name="portfolio_single"),
+    path("journal/<slug:slug>/", v.journal_single, name="journal_single"),
 
     # ── REST API ───────────────────────────────────────────────────────────────
     path("api/",            include(router.urls)),
