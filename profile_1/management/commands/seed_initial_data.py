@@ -108,35 +108,45 @@ class Command(BaseCommand):
             {
                 "institute": "Devi Ahilya Vishwavidyalaya, Indore",
                 "degree": "Master of Technology in Computer Science",
-                "start_year": "June 2023",
-                "end_year": "May 2025",
+                "start_year": "2023-06-01",
+                "end_year": "2025-04-30",
                 "description": (
                     "Specialized in software engineering, machine learning, distributed systems, "
-                    "and cloud computing. Worked on AI-powered applications, scalable backend "
-                    "systems, and research focused on data processing and intelligent solutions."
+                    "and cloud computing. Worked on AI-powered applications and scalable backend systems."
                 ),
+                "specializations": [
+                    "Advanced Algorithms", "Machine Learning & AI", "Distributed Systems",
+                    "Cyber Security", "Artificial Intelligence (Python)", "Web Development (Django, Flask)"
+                ],
                 "display_order": 0,
             },
             {
                 "institute": "Sri Aurobindo Institute of Technology, Indore",
                 "degree": "Bachelor of Technology in Computer Science",
-                "start_year": "July 2019",
-                "end_year": "May 2023",
+                "start_year": "2019-03-01",
+                "end_year": "2023-05-31",
                 "description": (
                     "Built a strong foundation in programming, software development, system design, "
-                    "and problem-solving while exploring backend engineering, cloud technologies, "
-                    "and real-world application development."
+                    "and problem-solving while exploring backend engineering and cloud technologies."
                 ),
+                "specializations": [
+                    "Data Structures & Algorithms", "Operating Systems",
+                    "Data Analytics & Cloud Computing", "AWS Infrastructure"
+                ],
                 "display_order": 1,
             },
         ]
         for e in entries:
-            obj, created = Education.objects.get_or_create(
-                institute=e["institute"], degree=e["degree"],
+            institute = e["institute"]
+            degree = e["degree"]
+            obj, created = Education.objects.update_or_create(
+                institute=institute, degree=degree,
                 defaults=e,
             )
             if created:
-                self.stdout.write(f"  Education: {e['degree']} seeded.")
+                self.stdout.write(f"  Education: {degree} seeded.")
+            else:
+                self.stdout.write(f"  Education: {degree} updated.")
 
     # ── Skills ──────────────────────────────────────────────────────────
     def _seed_skills(self):

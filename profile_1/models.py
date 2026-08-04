@@ -40,6 +40,7 @@ class Education(models.Model):
     percentage = models.CharField(max_length=20, blank=True)
 
     description = models.TextField(blank=True)
+    specializations = models.JSONField(default=list, blank=True)
 
     display_order = models.PositiveIntegerField(default=0)
 

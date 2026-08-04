@@ -147,12 +147,34 @@ class ExperienceForm(forms.ModelForm):
             "start_date": forms.DateInput(attrs={"type": "date"}),
             "end_date": forms.DateInput(attrs={"type": "date"}),
             "description": forms.Textarea(attrs={"rows": 4}),
-            "technologies": forms.Textarea(attrs={"rows": 2, "placeholder": '["Python","Django"]'}),
+            "technologies": forms.TextInput(attrs={
+                "placeholder": "e.g. FastAPI, Django, AWS, Docker, PostgreSQL",
+                "help_text": "Enter technologies separated by commas"
+            }),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         _auto_display_order(self, Experience)
+        if self.instance and self.instance.pk and isinstance(self.instance.technologies, list):
+            self.initial["technologies"] = ", ".join(self.instance.technologies)
+
+    def clean_technologies(self):
+        val = self.cleaned_data.get("technologies")
+        if isinstance(val, list):
+            return val
+        if isinstance(val, str):
+            val = val.strip()
+            if not val:
+                return []
+            if val.startswith("[") and val.endswith("]"):
+                import json
+                try:
+                    return json.loads(val)
+                except Exception:
+                    pass
+            return [t.strip() for t in val.split(",") if t.strip()]
+        return []
 
 
 class EducationForm(forms.ModelForm):
@@ -161,14 +183,37 @@ class EducationForm(forms.ModelForm):
         fields = [
             "institute", "degree",
             "start_year", "end_year",
-            "percentage", "description", "display_order",
+            "percentage", "description", "specializations", "display_order",
         ]
         widgets = {
             "start_year": forms.DateInput(attrs={"type": "date"}),
             "end_year": forms.DateInput(attrs={"type": "date"}),
             "description": forms.Textarea(attrs={"rows": 3}),
+            "specializations": forms.TextInput(attrs={
+                "placeholder": "e.g. Advanced Algorithms, Machine Learning & AI, Distributed Systems",
+                "help_text": "Enter specialization subjects / coursework separated by commas"
+            }),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         _auto_display_order(self, Education)
+        if self.instance and self.instance.pk and isinstance(self.instance.specializations, list):
+            self.initial["specializations"] = ", ".join(self.instance.specializations)
+
+    def clean_specializations(self):
+        val = self.cleaned_data.get("specializations")
+        if isinstance(val, list):
+            return val
+        if isinstance(val, str):
+            val = val.strip()
+            if not val:
+                return []
+            if val.startswith("[") and val.endswith("]"):
+                import json
+                try:
+                    return json.loads(val)
+                except Exception:
+                    pass
+            return [s.strip() for s in val.split(",") if s.strip()]
+        return []

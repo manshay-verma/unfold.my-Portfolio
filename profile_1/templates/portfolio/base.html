@@ -511,27 +511,6 @@
         </div>
       </div>
       
-      <!-- Journal Preview Modal -->
-      <div class="modal fade" id="journalModal" tabindex="-1" role="dialog" aria-hidden="true" style="backdrop-filter: blur(5px);">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-          <div class="modal-content" style="background-color: #111; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
-            <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-              <h5 class="modal-title" id="journalModalTitle" style="color: #fff; font-weight: 600;">Journal Preview</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff; opacity: 0.8;">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body p-0">
-              <div id="journalModalImageContainer" style="width: 100%; height: 250px; background-size: cover; background-position: center; border-bottom: 1px solid rgba(255,255,255,0.1);"></div>
-              <div class="p-4">
-                <p id="journalModalMeta" style="font-size: 12px; color: #D63447; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px;"></p>
-                <p id="journalModalExcerpt" style="color: #8892a4; font-size: 15px; line-height: 1.6; margin-bottom: 25px;"></p>
-                <a href="#" id="journalModalReadMoreBtn" class="btn btn-primary" style="background: #D63447; border: none; padding: 10px 25px; border-radius: 30px; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">Read Full Article</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- END blog posts -->
 
 
@@ -642,7 +621,34 @@
     <script src="{% static 'js/scripts-dist.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/hero-animation.js' %}"></script>
-    <script src="{% static 'js/cms-render.js' %}?v=2"></script>
+    <script src="{% static 'js/cms-render.js' %}?v=3"></script>
+    <!-- Journal Preview Modal -->
+    <div class="modal fade" id="journalModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content" style="background: #13161e; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); overflow: hidden;">
+          <div class="modal-header px-4 py-3" style="border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: #a78bfa; background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); padding: 4px 12px; border-radius: 20px;">Quick Preview</span>
+            <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" onclick="closeJournalModal()" style="color: #94a3b8; opacity: 0.8; font-size: 24px; outline: none; background: none; border: none; cursor: pointer; transition: color 0.2s; padding: 0 8px;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-0">
+            <div id="journalModalImageContainer" style="width: 100%; height: 260px; background-size: cover; background-position: center; border-bottom: 1px solid rgba(255,255,255,0.07);"></div>
+            <div class="p-4 p-md-5">
+              <h3 id="journalModalTitle" style="font-size: 22px; font-weight: 700; color: #f8fafc; line-height: 1.4; margin-bottom: 12px;"></h3>
+              <div id="journalModalMeta" style="font-size: 13px; color: #94a3b8; font-weight: 500; margin-bottom: 20px; display: flex; flex-wrap: wrap; align-items: center;"></div>
+              <p id="journalModalExcerpt" style="color: #cbd5e1; font-size: 15px; line-height: 1.7; margin-bottom: 24px;"></p>
+              <div id="journalModalLinks" style="margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 8px;"></div>
+              <div style="display: flex; justify-content: flex-end; padding-top: 10px;">
+                <a href="#" id="journalModalReadMoreBtn" class="btn" style="background: linear-gradient(135deg, #7c6af5, #9066f5); color: #ffffff; border: none; padding: 12px 28px; border-radius: 30px; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(124, 106, 245, 0.4); cursor: pointer;">
+                  <span>Read Full Article</span> <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>

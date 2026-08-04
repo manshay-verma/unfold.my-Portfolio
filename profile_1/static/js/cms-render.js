@@ -131,6 +131,15 @@
       var end = formatDateString(exp.end_date) || 'Present';
       var timeRange = start ? (start + ' – ' + end) : end;
 
+      var techHtml = '';
+      if (exp.technologies && Array.isArray(exp.technologies) && exp.technologies.length) {
+        techHtml = '<div class="timeline__techs mt-3" style="display: flex; flex-wrap: wrap; gap: 6px;">' +
+          exp.technologies.map(function (t) {
+            return '<span class="tech-badge" style="background: rgba(167, 139, 250, 0.12); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.25); font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 500; letter-spacing: 0.3px;">' + t + '</span>';
+          }).join('') +
+          '</div>';
+      }
+
       return '<div class="timeline__block gsap-reveal">' +
         '<div class="timeline__bullet"></div>' +
         '<div class="timeline__header">' +
@@ -138,7 +147,7 @@
         '<h5 class="timeline__meta">' + (exp.position || '') + '</h5>' +
         '<p class="timeline__timeframe">' + timeRange + '</p>' +
         '</div>' +
-        '<div class="timeline__desc"><p>' + (exp.description || '') + '</p></div>' +
+        '<div class="timeline__desc"><p>' + (exp.description || '') + '</p>' + techHtml + '</div>' +
         '</div>';
     }).join('');
   }
@@ -153,6 +162,15 @@
       var end = formatDateString(edu.end_year) || 'Present';
       var timeRange = start ? (start + ' – ' + end) : end;
 
+      var specHtml = '';
+      if (edu.specializations && Array.isArray(edu.specializations) && edu.specializations.length) {
+        specHtml = '<div class="timeline__specs mt-3" style="display: flex; flex-wrap: wrap; gap: 6px;">' +
+          edu.specializations.map(function (s) {
+            return '<span class="spec-badge" style="background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25); font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 500; letter-spacing: 0.3px;">' + s + '</span>';
+          }).join('') +
+          '</div>';
+      }
+
       return '<div class="timeline__block gsap-reveal">' +
         '<div class="timeline__bullet"></div>' +
         '<div class="timeline__header">' +
@@ -160,7 +178,7 @@
         '<h5 class="timeline__meta">' + (edu.degree || '') + '</h5>' +
         '<p class="timeline__timeframe">' + timeRange + '</p>' +
         '</div>' +
-        '<div class="timeline__desc"><p>' + (edu.description || '') + '</p></div>' +
+        '<div class="timeline__desc"><p>' + (edu.description || '') + '</p>' + specHtml + '</div>' +
         '</div>';
     }).join('');
   }
@@ -174,13 +192,15 @@
     container.innerHTML = skills.map(function (s) {
       var icon = s.icon || 'fa-solid fa-code';
       var desc = s.description || '';
-      var categoryBadge = s.category ? '<span style="position: absolute; top: 18px; right: 18px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #a78bfa; background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); padding: 3px 10px; border-radius: 20px;">' + s.category + '</span>' : '';
+      var categoryBadge = s.category ? '<span style="display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; color: #a78bfa; background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); padding: 4px 12px; border-radius: 20px;">' + s.category + '</span>' : '';
 
       return '<div class="col-md-6 col-lg-4 mb-4">' +
-        '<div class="feature-v1" style="position: relative; height: 100%; display: flex; flex-direction: column; background: #13161e; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; transition: transform 0.3s ease, border-color 0.3s ease;">' +
+        '<div class="feature-v1" style="height: 100%; display: flex; flex-direction: column; background: #13161e; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; transition: transform 0.3s ease, border-color 0.3s ease;">' +
+        '<div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 16px;">' +
+        '<div class="wrap-icon" style="margin-bottom: 0;">' +
+        '<i class="' + icon + '" style="font-size: 30px; color: #818cf8;"></i>' +
+        '</div>' +
         categoryBadge +
-        '<div class="wrap-icon mb-3">' +
-        '<i class="' + icon + '" style="font-size: 32px; color: #818cf8;"></i>' +
         '</div>' +
         '<h3 style="font-size: 17px; font-weight: 600; color: #f8fafc; margin-bottom: 10px;">' + s.name + '</h3>' +
         '<p style="font-size: 13.5px; color: #94a3b8; line-height: 1.6; margin-bottom: 20px; flex: 1;">' + desc + '</p>' +
@@ -364,21 +384,41 @@
     }).join('');
   }
 
+  window.closeJournalModal = function() {
+    if (typeof $ !== 'undefined' && $('#journalModal').length && typeof $('#journalModal').modal === 'function') {
+      $('#journalModal').modal('hide');
+    }
+    var m = el('journalModal');
+    if (m) {
+      m.classList.remove('show');
+      m.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      var backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop && backdrop.parentNode) {
+        backdrop.parentNode.removeChild(backdrop);
+      }
+    }
+  };
+
   window.openJournalModal = function(index) {
     if (!window.journalData || !window.journalData[index]) return;
     var j = window.journalData[index];
     
     var readTime = j.read_time ? (j.read_time.toLowerCase().includes('min') ? j.read_time : j.read_time + ' mins read') : '3 mins read';
-    var pubDate = j.publish_date || (j.created_at ? j.created_at.split('T')[0] : '');
+    var pubDate = formatDateString(j.publish_date) || (j.created_at ? j.created_at.split('T')[0] : '');
 
     var titleEl = el('journalModalTitle');
-    if (titleEl) titleEl.innerText = j.title;
+    if (titleEl) titleEl.innerText = j.title || 'Journal Preview';
     
     var metaEl = el('journalModalMeta');
-    if (metaEl) metaEl.innerHTML = 'By ' + (j.author || 'Admin') + (pubDate ? ' &bull; ' + pubDate : '') + ' &bull; ' + readTime;
+    if (metaEl) {
+      metaEl.innerHTML = '<span style="display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-user-pen" style="color:#818cf8;"></i> By ' + (j.author || 'Admin') + '</span>' +
+        (pubDate ? ' <span style="margin:0 8px; color:rgba(255,255,255,0.2);">|</span> <span style="display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-calendar-days" style="color:#818cf8;"></i> ' + pubDate + '</span>' : '') +
+        ' <span style="margin:0 8px; color:rgba(255,255,255,0.2);">|</span> <span style="display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-clock" style="color:#818cf8;"></i> ' + readTime + '</span>';
+    }
     
     var excerptEl = el('journalModalExcerpt');
-    if (excerptEl) excerptEl.innerText = j.excerpt || '';
+    if (excerptEl) excerptEl.innerText = j.excerpt || (j.content ? j.content.replace(/<[^>]+>/g, '').substring(0, 200) + '...' : '');
     
     var imgContainer = el('journalModalImageContainer');
     if (imgContainer) {
@@ -391,27 +431,26 @@
     }
 
     var modalLinksEl = el('journalModalLinks');
-    if (!modalLinksEl) {
-      modalLinksEl = document.createElement('div');
-      modalLinksEl.id = 'journalModalLinks';
-      modalLinksEl.style.cssText = 'margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 8px;';
-      var parentBody = el('journalModalExcerpt') ? el('journalModalExcerpt').parentNode : null;
-      var readMoreBtn = el('journalModalReadMoreBtn');
-      if (parentBody && readMoreBtn) {
-        parentBody.insertBefore(modalLinksEl, readMoreBtn);
+    if (modalLinksEl) {
+      if (j.external_urls && Array.isArray(j.external_urls) && j.external_urls.length > 0) {
+        modalLinksEl.style.display = 'flex';
+        modalLinksEl.innerHTML = j.external_urls.map(function(link) {
+          return '<a href="' + link.url + '" target="_blank" style="background: rgba(167, 139, 250, 0.12); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.25); border-radius: 20px; font-size: 12px; font-weight: 600; padding: 6px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;"><i class="fa-solid fa-arrow-up-right-from-square"></i> ' + (link.title || 'Link') + '</a>';
+        }).join('');
+      } else {
+        modalLinksEl.style.display = 'none';
       }
-    }
-    if (j.external_urls && Array.isArray(j.external_urls) && j.external_urls.length > 0) {
-      modalLinksEl.style.display = 'flex';
-      modalLinksEl.innerHTML = j.external_urls.map(function(link) {
-        return '<a href="' + link.url + '" target="_blank" class="btn btn-sm" style="background: rgba(124, 106, 245, 0.2); color: #a78bfa; border: 1px solid rgba(124, 106, 245, 0.4); border-radius: 20px; font-size: 12px; font-weight: 500; padding: 6px 14px; text-decoration: none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> ' + (link.title || 'Link') + '</a>';
-      }).join('');
-    } else if (modalLinksEl) {
-      modalLinksEl.style.display = 'none';
     }
     
     var readMoreBtn = el('journalModalReadMoreBtn');
-    if (readMoreBtn) readMoreBtn.href = '/journal/' + j.slug + '/';
+    if (readMoreBtn) {
+      var targetUrl = '/journal/' + (j.slug || '') + '/';
+      readMoreBtn.href = targetUrl;
+      readMoreBtn.onclick = function(e) {
+        e.preventDefault();
+        window.location.href = targetUrl;
+      };
+    }
     
     if (typeof $ !== 'undefined' && $('#journalModal').length && typeof $('#journalModal').modal === 'function') {
       $('#journalModal').modal('show');
