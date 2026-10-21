@@ -31,7 +31,7 @@ if not SECRET_KEY:
     SECRET_KEY = "django-insecure-jsf8d$zjbuad!r(g*3x=cq)6!cv6*lsi%nmcqobqg$z8fo$9jr"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "true" if not IS_RENDER else "false").lower() == "true"
+DEBUG = os.environ.get("DJANGO_DEBUG", "true" if not IS_RENDER else "true").lower() == "true"
 
 ALLOWED_HOSTS = [host.strip() for host in os.environ.get(
     "DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1"
