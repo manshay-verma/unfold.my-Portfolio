@@ -1,0 +1,78 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}Dashboard{% endblock %}
+{% block page_title_header %}Dashboard{% endblock %}
+{% block nav_dashboard %}active{% endblock %}
+
+{% block content %}
+<div class="row g-4 mb-4">
+  <div class="col-sm-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-briefcase"></i></div>
+      <div class="stat-value">{{ experience_count }}</div>
+      <div class="stat-label">Experience Entries</div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div class="stat-value">{{ education_count }}</div>
+      <div class="stat-label">Education Entries</div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-diagram-project"></i></div>
+      <div class="stat-value">{{ projects_count }}</div>
+      <div class="stat-label">Projects</div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-code"></i></div>
+      <div class="stat-value">{{ skills_count }}</div>
+      <div class="stat-label">Skills</div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-certificate"></i></div>
+      <div class="stat-value">{{ certifications_count }}</div>
+      <div class="stat-label">Certifications</div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-share-nodes"></i></div>
+      <div class="stat-value">{{ social_count }}</div>
+      <div class="stat-label">Social Links</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="panel-card">
+      <h6 style="font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;">Quick Actions</h6>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="{% url 'admin_panel:project-add' %}" class="btn-panel btn-primary-panel"><i class="fa-solid fa-plus"></i> Add Project</a>
+        <a href="{% url 'admin_panel:skill-add' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-plus"></i> Add Skill</a>
+        <a href="{% url 'admin_panel:experience-add' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-plus"></i> Add Experience</a>
+        <a href="{% url 'admin_panel:certification-add' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-plus"></i> Add Certificate</a>
+        <a href="{% url 'admin_panel:social-add' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-plus"></i> Add Social</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel-card">
+      <h6 style="font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;">Singleton Sections</h6>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="{% url 'admin_panel:hero' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-star"></i> Hero</a>
+        <a href="{% url 'admin_panel:about' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-user"></i> About</a>
+        <a href="{% url 'admin_panel:resume' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+        <a href="{% url 'admin_panel:contact' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-envelope"></i> Contact</a>
+        <a href="{% url 'admin_panel:seo' %}" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-magnifying-glass"></i> SEO</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}Contact Info{% endblock %}
+{% block page_title_header %}Contact Info{% endblock %}
+{% block nav_contact %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Contact Information</h2>
+  <a href="/" target="_blank" class="btn-panel btn-secondary-panel"><i class="fa-solid fa-eye"></i> Preview</a>
+</div>
+<div class="panel-card" style="max-width:620px;">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include "admin-panel/includes/form_fields.html" with form=form %}
+    <button type="submit" class="btn-panel btn-primary-panel"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+  </form>
+</div>
+{% endblock %}

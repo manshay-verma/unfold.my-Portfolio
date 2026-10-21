@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "profile_1"
+    "profile_1",
+    "rest_framework",
+    "adminsortable2",
+    "ckeditor",
 ]
 
 MIDDLEWARE = [
@@ -126,4 +129,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Login settings
+LOGIN_URL = '/admin-panel/login/'
+LOGIN_REDIRECT_URL = '/admin-panel/'
+

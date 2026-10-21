@@ -53,51 +53,36 @@ var siteIstotope = function() {
   })
   .done(function() {
   	$('.gsap-reveal-img').each(function() {
-			var html = $(this).html();
-			$(this).html('<div class="reveal-wrap"><span class="cover"></span><div class="reveal-content">'+html+'</div></div>');
+  		if (!$(this).find('.reveal-wrap').length) {
+				var html = $(this).html();
+				$(this).html('<div class="reveal-wrap"><span class="cover"></span><div class="reveal-content">'+html+'</div></div>');
+  		}
 		});
 
   	var controller = new ScrollMagic.Controller();
-
   	var revealImg = $('.gsap-reveal-img');
 
   	if ( revealImg.length ) {
-  		var i = 0;
 			revealImg.each(function() {
-
 				var cover = $(this).find('.cover'),
 					revealContent = $(this).find('.reveal-content'),
 					img = $(this).find('.reveal-content img');
 
-
 				var tl2 = new TimelineMax();
 
+				tl2.set(img, { scale: '2.0', autoAlpha: 1 })
+				   .to(cover, 0.8, { marginLeft: '0', ease: Expo.easeInOut })
+				   .set(revealContent, { autoAlpha: 1 })
+				   .to(cover, 0.8, { marginLeft: '102%', ease: Expo.easeInOut })
+				   .to(img, 1.5, { scale: '1.0', ease: Expo.easeOut }, '-=1.2');
 
-				setTimeout(function() {
-
-					tl2
-						tl2.set(img, {  scale: '2.0', autoAlpha: 1, })
-						.to(cover, 1, { marginLeft: '0', ease:Expo.easeInOut, onComplete() {
-							tl2.set(revealContent, { autoAlpha: 1 });
-							tl2.to(cover, 1, { marginLeft: '102%', ease:Expo.easeInOut });
-							tl2.to(img, 2, { scale: '1.0', ease:Expo.easeOut }, '-=1.5');
-						} } )
-
-				}, i * 700);
-
-				
-
-				var scene = new ScrollMagic.Scene({
+				new ScrollMagic.Scene({
 					triggerElement: this,
-					duration: "0%",
-					reverse: false,
-					offset: "-300%",
+					triggerHook: 0.85,
+					reverse: false
 				})
 				.setTween(tl2)
 				.addTo(controller);
-
-				i++;
-
 			});
 		}
   })
@@ -617,22 +602,15 @@ var animateReveal = function() {
 
 			var tl = new TimelineMax();
 
-			setTimeout(function() {
-				tl
-					.fromTo(cover, 2, { skewX: 0 }, { xPercent: 101, transformOrigin: "0% 100%", ease:Expo.easeInOut })
-			}, revealNum * 0);
+			tl.fromTo(cover, 1.5, { skewX: 0 }, { xPercent: 101, transformOrigin: "0% 100%", ease:Expo.easeInOut });
 			
-			var scene = new ScrollMagic.Scene({
+			new ScrollMagic.Scene({
 				triggerElement: this,
-				duration: "0%",
-				reverse: false,
-				offset: "-300%",
+				triggerHook: 0.85,
+				reverse: false
 			})
 			.setTween(tl)
 			.addTo(controller);
-
-			revealNum++;
-
 		});
 	}
 

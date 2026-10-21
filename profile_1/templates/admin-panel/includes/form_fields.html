@@ -1,0 +1,35 @@
+{# Reusable snippet: renders any Django form with panel styling #}
+{# Usage: {% include "admin-panel/includes/form_fields.html" with form=form %} #}
+{% for field in form %}
+  <div class="form-group-panel">
+    <label class="form-label-panel" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {% if field.field.widget.input_type == 'file' %}
+      {% if field.value %}
+        <div style="margin-bottom:8px;">
+          <a href="{{ field.value.url }}" target="_blank" class="btn-panel btn-secondary-panel btn-sm-panel">
+            <i class="fa-solid fa-file"></i> Current file
+          </a>
+        </div>
+      {% endif %}
+      <input type="file" name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form-control-panel" style="padding:8px;">
+    {% elif field.field.widget.input_type == 'checkbox' %}
+      <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+        <input type="checkbox" name="{{ field.html_name }}" id="{{ field.id_for_label }}" {% if field.value %}checked{% endif %} style="width:16px;height:16px;accent-color:var(--accent);">
+        <label for="{{ field.id_for_label }}" style="margin:0;color:var(--text);font-size:14px;">{{ field.label }}</label>
+      </div>
+    {% elif field.field.widget.input_type == 'select' %}
+      <select name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form-control-panel">
+        {% for choice_val, choice_label in field.field.choices %}
+          <option value="{{ choice_val }}" {% if field.value == choice_val %}selected{% endif %}>{{ choice_label }}</option>
+        {% endfor %}
+      </select>
+    {% else %}
+      {% if field.field.widget.attrs.rows %}
+        <textarea name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form-control-panel" rows="{{ field.field.widget.attrs.rows }}" placeholder="{{ field.field.widget.attrs.placeholder|default:'' }}">{{ field.value|default:'' }}</textarea>
+      {% else %}
+        <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{ field.id_for_label }}" value="{{ field.value|default:'' }}" class="form-control-panel" placeholder="{{ field.field.widget.attrs.placeholder|default:'' }}">
+      {% endif %}
+    {% endif %}
+    {% if field.errors %}<div style="color:var(--danger);font-size:12px;margin-top:4px;">{{ field.errors }}</div>{% endif %}
+  </div>
+{% endfor %}

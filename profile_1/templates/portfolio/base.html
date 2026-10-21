@@ -16,11 +16,25 @@
     <link rel="stylesheet" href="{% static 'css/vendor/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'css/vendor/jquery.fancybox.min.css'%}">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero-animation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/portfolio-projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile-touch.css' %}">
     {% block extra_css %}{% endblock %}
+    <style>
+      .journal-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(124, 106, 245, 0.4) !important;
+        box-shadow: 0 12px 30px rgba(124, 106, 245, 0.18) !important;
+      }
+      .journal-card:hover .journal-card-img {
+        transform: scale(1.06);
+      }
+    </style>
 
   </head>
   <body data-spy="scroll" data-target=".site-nav-target" data-offset="200">
@@ -78,8 +92,7 @@
                   </ul>
                 </li>
                 <li><a href="#about-section" class="nav-link">About</a></li>
-                <li><a href="#portfolio-section" class="nav-link">Portfolio</a></li>
-                <li><a href="#services-section" class="nav-link">Services</a></li>
+                <li><a href="#portfolio-section" class="nav-link">Projects</a></li>
               </ul>
             </div>
             <div class="site-logo pos-absolute">
@@ -87,8 +100,7 @@
             </div>
             <div class="col-md-5 text-right text-lg-left">
               <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
-                <li><a href="#skills-section" class="nav-link">Skills</a></li>
-                <li><a href="#testimonial-section" class="nav-link">Testimonial</a></li>
+                <li><a href="#knowledge-section" class="nav-link">Knowledge</a></li>
                 <li><a href="#journal-section" class="nav-link">Journal</a></li>
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
               </ul>
@@ -104,13 +116,34 @@
       </nav>
       <!-- END nav -->
 
-      <div class="cover-v1 jarallax" style="background-image: url('{% static 'images/cover_bg_2.jpg' %}');" id="home-section">
+      <div class="cover-v1 jarallax overlay" style="background-image: url('{% static 'images/cover_bg_2.jpg' %}');" id="home-section">
         <div class="container">
           <div class="row align-items-center">
               
-            <div class="col-md-7 mx-auto text-center">
-              <h1 class="heading gsap-reveal-hero">Unfold My</h1>
-              <h2 class="subheading gsap-reveal-hero">I’m Manshay Verma, a Software Engineer based in India.</h2>
+            <div class="col-md-10 mx-auto text-center">
+              <h1 class="heading hero-title text-white justify-content-center" id="hero-title">
+                <!-- Initial State -->
+                <div class="intro-wrapper">
+                    <span class="letter letter-u">U</span>
+                    <span class="letter unfold-letters">nfold</span>
+                    <span class="letter dot-letter">.</span>
+                    <span class="letter letter-m">M</span>
+                    <span class="letter letter-y">y</span>
+                </div>
+                <!-- Final State (Hidden target for positioning) -->
+                <div class="final-wrapper" style="position: absolute; opacity: 0; pointer-events: none;">
+                    <span class="letter m-target">M</span>
+                    <span class="manshay-part">
+                        <span class="letter anshay-letter">a</span>
+                        <span class="letter anshay-letter">n</span>
+                        <span class="letter anshay-letter">s</span>
+                        <span class="letter anshay-letter">h</span>
+                        <span class="letter anshay-letter">a</span>
+                        <span class="letter anshay-letter">y</span>
+                    </span>
+                </div>
+              </h1>
+              <h2 class="subheading hero-subheading text-white">I’m Manshay Verma, a Software Engineer who loves building complete and scalable solutions.</h2>
             </div>
 
           </div>
@@ -143,10 +176,13 @@
                 <img src="{% static 'images/about_me_pic2.jpg' %}" alt="Image" class="img-fluid">
               </figure>
             </div>
-            <div class="col-lg-4 pr-lg-5">
-              <h3 class="mb-4 heading-h3"><span class="gsap-reveal">We can make it together</span></h3>
-              <p class="lead gsap-reveal">Beyond the <a href="#">syntax mountains</a>, I craft Python scripts that turn data into insights, flowing like a stream of clean code. </p>
-              <p class="mb-4 gsap-reveal">In a world of algorithms and Pythonic flows, I build programs that automate, analyze, and deliver results.</p>
+            <div class="col-lg-5 pr-lg-5">
+              <h3 class="mb-4 heading-h3" id="about-title-wrap">
+                <!-- Populated by cms-render.js -->
+              </h3>
+              <div id="about-description-wrap">
+                <!-- Populated by cms-render.js -->
+              </div>
               <p class="gsap-reveal"><a href="#" class="btn btn-outline-pill btn-custom-light">Download my CV</a></p>
             </div>
           </div>
@@ -156,6 +192,20 @@
 
       <div class="unslate_co--section">
         <div class="container">
+          <style>
+            .logo-slider .logo-v1 {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 80px; /* Fixed height container */
+            }
+            .logo-slider .logo-v1 img {
+              max-height: 100%;
+              width: auto !important; /* Override owl carousel 100% width */
+              max-width: 180px;
+              object-fit: contain;
+            }
+          </style>
           <div class="owl-carousel logo-slider">
             <div class="logo-v1 gsap-reveal">
               <img src="{% static 'images/logo-google.png' %}" alt="Image" class="img-fluid">
@@ -174,6 +224,75 @@
       </div>
 
 
+      <div class="unslate_co--section">
+        <div class="container">
+          <div class="row about-timelines">
+
+            <div class="col-lg-6 mb-5">
+              <h2 class="text-pretitle gsap-reveal">Experience</h2>
+              <div class="timeline">
+                <!-- Populated by cms-render.js -->
+              </div>
+            </div>
+
+            <div class="col-lg-6 mb-5">
+              <h2 class="text-pretitle gsap-reveal">Education</h2>
+              <div class="timeline">
+                <!-- Populated by cms-render.js -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+        <div class="unslate_co--section" id="knowledge-section">
+        <div class="container">
+          <div class="section-heading-wrap text-center mb-5">
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Knowledge</span></h2>
+            <span class="gsap-reveal"><img src="{% static 'images/divider.png' %}" alt="divider" width="76"></span>
+          </div>
+
+          <div class="row gutter-v4 justify-content-center">
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-cogs"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Backend Development</h3>
+                  <p>Worked on backend systems using Python, Django, FastAPI, and Flask while building APIs, automation tools, and data-processing applications. Experienced in developing scalable REST APIs, handling databases like PostgreSQL and MongoDB, and building real-world backend solutions for enterprise and analytics-based projects.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-cloud"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Infrastructure & DevOps</h3>
+                  <p>Worked with AWS services including EC2, S3, Lambda, CloudWatch, and VPC along with Docker, Kubernetes, and CI/CD workflows. Built deployment pipelines using GitHub Actions and GitLab CI/CD while managing server-side deployments, automation scripts, and cloud-based infrastructure environments.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-lightbulb-o"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Machine Learning</h3>
+                  <p>Built and experimented with Machine Learning and data-processing systems using TensorFlow, PyTorch, and Scikit-learn. Worked on recommendation systems, prediction models, ETL pipelines, data scraping, feature engineering, and analytics workflows focused on intelligent and automation-driven applications.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
       <div class="unslate_co--section" id="portfolio-section">
         <div class="container">
@@ -182,338 +301,68 @@
           <div class="relative"><div class="loader-portfolio-wrap"><div class="loader-portfolio"></div></div> </div>
           <div id="portfolio-single-holder"></div>
 
+          <div class="section-heading-wrap text-center mb-5">
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Projects</span></h2>
+            <span class="gsap-reveal">
+              <img src="{% static 'images/divider.png' %}" alt="divider" width="76">
+            </span>
+          </div>
+
           <div class="portfolio-wrapper">
-
-            <div class="d-flex align-items-center mb-4 gsap-reveal gsap-reveal-filter">
-              <h2 class="mr-auto heading-h2"><span class="gsap-reveal">Portfolio</span></h2>
-
-              <!-- <a href="#" class="text-white js-filter d-inline-block d-lg-none">Filter</a>
-              
-              <div class="filter-wrap">
-                <div class="filter ml-auto" id="filters">
-                  <a href="#" class="active" data-filter="*">All</a>
-                  <a href="#" data-filter=".web">Web</a>
-                  <a href="#" data-filter=".branding">Branding</a>
-                  <a href="#" data-filter=".illustration">Illustration</a>
-                  <a href="#" data-filter=".packaging">Packaging</a>
-                </div>
-              </div> -->
-            </div>
-
-
-            
             <div id="posts" class="row gutter-isotope-item">
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="portfolio-single-1.html" class="portfolio-item ajax-load-page isotope-item gsap-reveal-img" data-id="1">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Shoe Rebranding</h3>
-                        <p>web, branding</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_1_md.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-              <div class="item branding packaging illustration col-sm-6 col-md-6 col-lg-4 isotope-mb-2 ">
-                <a href="portfolio-single-3.html" class="portfolio-item ajax-load-page item-portrait isotope-item gsap-reveal-img" data-id="3">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Reworking</h3>
-                        <p>branding, packaging, illustration</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_2_md.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item branding packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="portfolio-single-4.html" class="portfolio-item isotope-item gsap-reveal-img ajax-load-page" data-id="4">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Modern Building</h3>
-                        <p>branding, packaging</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_3_md.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item web packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-
-                <a href="{% static 'images/work_4_full.jpg' %}" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Watch">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Watch</h3>
-                        <p>web, packaging</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_4_full.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-
-              </div>
-
-              <div class="item illustration packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% static 'images/work_5_md.jpg' %}" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Shoe Rebranding">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Shoe Rebranding</h3>
-                        <p>illustration, packaging</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_5_md.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="portfolio-single-2.html" class="portfolio-item ajax-load-page item-portrait isotope-item gsap-reveal-img" data-id="2">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Reshape</h3>
-                        <p>web, branding</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_6_md.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item branding packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% static 'images/work_7_a_md.jpg' %}images/work_7_a_md.jpg" class="portfolio-item item-portrait isotope-item gsap-reveal-img " data-fancybox="gallery" data-caption="Modern Building">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Modern Building</h3>
-                        <p>branding, packaging</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_7_a_md.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="https://www.youtube.com/watch?v=mwtbEGNABWU" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Showreel 2019">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-play_circle_filled"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Showreel 2019</h3>
-                        <p>web, branding</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_8_md.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item web illustration col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% static 'images/work_9_a_md.jpg' %}" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Render Packaging">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Render Packaging</h3>
-                        <p>web, illustration</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_9_a_md.jpg' %}" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
+              <!-- Populated by cms-render.js -->
             </div>
-            
           </div>
 
 
         </div>
       </div>
 
-      <div class="unslate_co--section" id="services-section">
-        <div class="container">
 
+
+      <style>
+        .skill-percentage-bar {
+          width: 100%;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          margin-top: 12px;
+          overflow: hidden;
+        }
+        .skill-percentage-fill {
+          height: 100%;
+          background: #D63447;
+          border-radius: 10px;
+          transition: width 0.6s ease;
+        }
+      </style>
+
+      <div class="unslate_co--section" id="skills-section">
+        <div class="container">
           <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">My Knowledge</span></h2>
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Skills & Expertise</span></h2>
             <span class="gsap-reveal"><img src="{% static 'images/divider.png' %}" alt="divider" width="76"></span>
           </div>
 
           <div class="row gutter-v3">
-              <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="200">
-                <div class="wrap-icon mb-3">
-                  <img src="{% static 'images/svg/005-line-chart.svg' %}" alt="Image" width="45">
-                </div>
-                <h3>Machine <br> Learning</h3>
-                <p>Building smart programs that learn from data and automate results. </p>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="0">
-                <div class="wrap-icon mb-3">
-                  <img src="{% static 'images/svg/001-options.svg' %}" alt="Image" width="45">
-                </div>
-                <h3>System <br> Security</h3>
-                <p>Skilled in Linux environments for development, automation, and security. </p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="100">
-                <div class="wrap-icon mb-3">
-                  <img src="{% static 'images/svg/002-chat.svg' %}" alt="Icon" width="45">
-                </div>
-                <h3>Web <br> Development</h3>
-                <p>I build backend systems using Django and FastAPI to power websites and apps. </p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="200">
-                <div class="wrap-icon mb-3">
-                  <img src="{% static 'images/svg/003-contact-book.svg' %}" alt="Image" class="img-fluid" width="45">
-                </div>
-                <h3>Cloud &  <br> AWS Expertise</h3>
-                <p>Hands-on experience in cloud architecture, deployment, and automation using AWS. </p>
-              </div> 
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="0">
-                <div class="wrap-icon mb-3">
-                  <img src="{% static 'images/svg/004-percentage.svg' %}" alt="Image" width="45">
-                </div>
-                <h3>Big <br>Data & Analytics</h3>
-                <p>Processing and analyzing large datasets using PySpark and Scala. </p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="100">
-                <div class="wrap-icon mb-3">
-                  <img src="{% static 'images/svg/006-goal.svg' %}" alt="Image" width="45">
-                </div>
-                <h3>Automation <br> & Scraping</h3>
-                <p>Extracting data from websites and applications with web scraping tools. </p>
-              </div> 
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-
-      <div class="unslate_co--section section-counter" id="skills-section">
-        <div class="container">
-          <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">My Skills</span></h2>
-            <span class="gsap-reveal"><img src="{% static 'images/divider.png' %}" alt="divider" width="76"></span>
-          </div>
-
-
-          <div class="row pt-5">
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="90">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">Python</span>
-              </div>
-            </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="99">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">Machine Learning</span>
-              </div>
-            </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="79">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">AWS</span>
-              </div>
-            </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="71">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">Big Data</span>
-              </div>
-            </div>
+            <!-- Skills are dynamically injected by cms-render.js here -->
           </div>
         </div>
       </div>
       <!-- END .counter -->
 
-      <div class="unslate_co--section" id="testimonial-section">
+      <div class="unslate_co--section">
         <div class="container">
           <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">My Happy Clients</span></h2>
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Certifications</span></h2>
             <span class="gsap-reveal"><img src="{% static 'images/divider.png' %}" alt="divider" width="76"></span>
           </div>
-        </div>
-
-        <div class="owl-carousel testimonial-slider" data-aos="fade-up">
-          <div>
-            <div class="testimonial-v1">
-              <div class="testimonial-inner-bg">
-                <span class="quote">&ldquo;</span>
-                <blockquote>
-                  Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-                </blockquote>
-              </div>
-              
-              <div class="testimonial-author-info">
-                <img src="{% static 'images/person_man_1.jpg' %}" alt="Image">
-                <h3>Eric Ingram</h3>
-                <span class="d-block position">Product Designer @facebook</span>
-              </div>
-
-            </div>
-          </div>
-          <div>
-            <div class="testimonial-v1">
-              <div class="testimonial-inner-bg">
-                <span class="quote">&ldquo;</span>
-                <blockquote>
-                  Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-                </blockquote>
-              </div>
-              
-              <div class="testimonial-author-info">
-                <img src="{% static 'images/person_man_2.jpg' %}" alt="Image">
-                <h3>Ryan Mullins</h3>
-                <span class="d-block position">Product Designer @Shopify</span>
-              </div>
-
-            </div>
-          </div>
-          <div>
-            <div class="testimonial-v1">
-              <div class="testimonial-inner-bg">
-                <span class="quote">&ldquo;</span>
-                <blockquote>
-                  Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-                </blockquote>
-              </div>
-              
-              <div class="testimonial-author-info">
-                <img src="{% static 'images/person_woman_1.jpg' %}" alt="Image">
-                <h3>Erica Miller</h3>
-                <span class="d-block position">Product Designer @Twitter</span>
-              </div>
-
-            </div>
+          
+          <div class="row gutter-v3 certifications-row">
+            <!-- Certifications dynamically injected by cms-render.js here -->
           </div>
         </div>
-
       </div>
-      <!-- END testimonial -->
-
       <div class="unslate_co--section" id="journal-section">
         <div class="container">
           <div class="section-heading-wrap text-center mb-5">
@@ -522,77 +371,12 @@
           </div>
 
           
-          <div class="row gutter-v4 align-items-stretch">
-            <div class="col-sm-6 col-md-6 col-lg-8 blog-post-entry" data-aos="fade-up" data-aos-delay="0">
-
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_1.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-
-
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="100">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_2.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-            </div>
-
-
-            <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="0">
-
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_3.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-
-
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="100">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_4.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-            </div>
-
-            <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="200">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
-                <div class="overlay">
-                  <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
-                  </div>
-                </div>
-                <img src="{% static 'images/post_5.jpg' %}" class="lazyload" alt="Image" />
-              </a>
-            </div>
-
-
+          <div class="row gutter-v4 align-items-stretch" id="journal-row">
+            <!-- Journal items dynamically injected by cms-render.js -->
           </div>
-
         </div>
       </div>
+      
       <!-- END blog posts -->
 
 
@@ -702,6 +486,87 @@
     </div>
     <script src="{% static 'js/scripts-dist.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/hero-animation.js' %}"></script>
+    <script src="{% static 'js/cms-render.js' %}?v=4"></script>
+    <!-- Journal Preview Modal -->
+    <div class="modal fade" id="journalModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content" style="background: #13161e; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); overflow: hidden;">
+          <div class="modal-header px-4 py-3" style="border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: #a78bfa; background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); padding: 4px 12px; border-radius: 20px;">Quick Preview</span>
+            <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" onclick="closeJournalModal()" style="color: #94a3b8; opacity: 0.8; font-size: 24px; outline: none; background: none; border: none; cursor: pointer; transition: color 0.2s; padding: 0 8px;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-0">
+            <div id="journalModalImageContainer" style="width: 100%; height: 260px; background-size: cover; background-position: center; border-bottom: 1px solid rgba(255,255,255,0.07);"></div>
+            <div class="p-4 p-md-5">
+              <h3 id="journalModalTitle" style="font-size: 22px; font-weight: 700; color: #f8fafc; line-height: 1.4; margin-bottom: 12px;"></h3>
+              <div id="journalModalMeta" style="font-size: 13px; color: #94a3b8; font-weight: 500; margin-bottom: 20px; display: flex; flex-wrap: wrap; align-items: center;"></div>
+              <p id="journalModalExcerpt" style="color: #cbd5e1; font-size: 15px; line-height: 1.7; margin-bottom: 24px;"></p>
+              <div id="journalModalLinks" style="margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 8px;"></div>
+              <div style="display: flex; justify-content: flex-end; padding-top: 10px;">
+                <a href="#" id="journalModalReadMoreBtn" class="btn" style="background: linear-gradient(135deg, #7c6af5, #9066f5); color: #ffffff; border: none; padding: 12px 28px; border-radius: 30px; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(124, 106, 245, 0.4); cursor: pointer;">
+                  <span>Read Full Article</span> <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Touch interaction for mobile/tablet hover effects -->
+    <script>
+    (function() {
+      var TOUCH_SELECTORS = [
+        '.portfolio-item',
+        '.feature-v1',
+        '.cert-card-v2',
+        '.journal-card',
+        '.project-detail-card'
+      ];
+
+      function bindTouch(el) {
+        if (el._touchBound) return;
+        el._touchBound = true;
+        var timer;
+
+        el.addEventListener('touchstart', function() {
+          el.classList.add('is-touched');
+          clearTimeout(timer);
+        }, { passive: true });
+
+        el.addEventListener('touchend', function() {
+          timer = setTimeout(function() {
+            el.classList.remove('is-touched');
+          }, 350);
+        }, { passive: true });
+
+        el.addEventListener('touchcancel', function() {
+          el.classList.remove('is-touched');
+        }, { passive: true });
+      }
+
+      function attachTouchListeners() {
+        TOUCH_SELECTORS.forEach(function(sel) {
+          document.querySelectorAll(sel).forEach(bindTouch);
+        });
+      }
+
+      // Run on load and after CMS data is rendered (observe DOM changes)
+      document.addEventListener('DOMContentLoaded', function() {
+        attachTouchListeners();
+
+        // MutationObserver to catch dynamically injected elements from cms-render.js
+        var observer = new MutationObserver(function(mutations) {
+          var hasNew = mutations.some(function(m) { return m.addedNodes.length > 0; });
+          if (hasNew) attachTouchListeners();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      });
+    })();
+    </script>
 
   </body>
 </html>

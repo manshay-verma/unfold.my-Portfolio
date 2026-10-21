@@ -19,6 +19,8 @@
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/timeline.css">
+    <link rel="stylesheet" href="css/hero-animation.css">
 
   </head>
   <body data-spy="scroll" data-target=".site-nav-target" data-offset="200">
@@ -82,10 +84,9 @@
                   </ul>
                 </li>
                 <li><a href="#about-section" class="nav-link">About</a></li>
-                <li><a href="#portfolio-section" class="nav-link">Portfolio</a></li>
-                <li><a href="#services-section" class="nav-link">Services</a></li>
+                <li><a href="#portfolio-section" class="nav-link">Projects</a></li>
+                <li><a href="#knowledge-section" class="nav-link">Knowledge</a></li>
                 <li><a href="#skills-section" class="nav-link">Skills</a></li>
-                <li><a href="#testimonial-section" class="nav-link">Testimonial</a></li>
                 <li><a href="#journal-section" class="nav-link">Journal</a></li>
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
               </ul>
@@ -105,9 +106,30 @@
         <div class="container">
           <div class="row align-items-center">
               
-            <div class="col-md-7 mx-auto text-center">
-              <h1 class="heading gsap-reveal-hero text-white">Unfold</h1>
-              <h2 class="subheading gsap-reveal-hero text-white">I’m Eric Woodman A Product Designer Based In San Francisco</h2>
+            <div class="col-md-10 mx-auto text-center">
+              <h1 class="heading hero-title text-white justify-content-center" id="hero-title">
+                <!-- Initial State -->
+                <div class="intro-wrapper">
+                    <span class="letter letter-u">U</span>
+                    <span class="letter unfold-letters">nfold</span>
+                    <span class="letter dot-letter">.</span>
+                    <span class="letter letter-m">M</span>
+                    <span class="letter letter-y">y</span>
+                </div>
+                <!-- Final State (Hidden target for positioning) -->
+                <div class="final-wrapper" style="position: absolute; opacity: 0; pointer-events: none;">
+                    <span class="letter m-target">M</span>
+                    <span class="manshay-part">
+                        <span class="letter anshay-letter">a</span>
+                        <span class="letter anshay-letter">n</span>
+                        <span class="letter anshay-letter">s</span>
+                        <span class="letter anshay-letter">h</span>
+                        <span class="letter anshay-letter">a</span>
+                        <span class="letter anshay-letter">y</span>
+                    </span>
+                </div>
+              </h1>
+              <h2 class="subheading hero-subheading text-white">I’m Manshay Verma, a Software Engineer who loves building complete and scalable solutions.</h2>
             </div>
 
           </div>
@@ -141,9 +163,9 @@
               </figure>
             </div>
             <div class="col-lg-4 pr-lg-5">
-              <h3 class="mb-4 heading-h3"><span class="gsap-reveal">We can make it together</span></h3>
-              <p class="lead gsap-reveal">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there <a href="#">live the blind</a> texts. </p>
-              <p class="mb-4 gsap-reveal">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+              <h3 class="mb-4 heading-h3"><span class="gsap-reveal">I’m a Software Engineer who loves building complete and scalable solutions.</span></h3>
+              <p class="gsap-reveal">My experience covers Backend Development, Machine Learning, and DevOps, which allows me to work on everything from APIs and automation systems to cloud infrastructure and intelligent applications.</p>
+              <p class="mb-4 gsap-reveal">I’m always curious to learn new technologies, improve my skills, and build projects that create real impact through software, cloud, and AI.</p>
               <p class="gsap-reveal"><a href="#" class="btn btn-outline-pill btn-custom-light">Download my CV</a></p>
             </div>
           </div>
@@ -171,6 +193,123 @@
       </div>
 
 
+      <div class="unslate_co--section">
+        <div class="container">
+          <div class="row about-timelines">
+
+            <div class="col-lg-6 mb-5">
+              <h2 class="text-pretitle gsap-reveal">Experience</h2>
+              <div class="timeline">
+
+                <div class="timeline__block gsap-reveal">
+                  <div class="timeline__bullet"></div>
+                  <div class="timeline__header">
+                    <h4 class="timeline__title">CubexO Software Solutions</h4>
+                    <h5 class="timeline__meta">Software Engineer</h5>
+                    <p class="timeline__timeframe">May 2025 – Present</p>
+                  </div>
+                  <div class="timeline__desc">
+                    <p>Building scalable backend applications and automation systems using modern development practices. Working on API development, cloud-based workflows, data processing, and deployment pipelines while contributing to reliable and high-performance software solutions. Also involved in DevOps practices, infrastructure management, and system optimization for production environments.</p>
+                  </div>
+                </div>
+
+                <div class="timeline__block gsap-reveal">
+                  <div class="timeline__bullet"></div>
+                  <div class="timeline__header">
+                    <h4 class="timeline__title">Active Now Technologies</h4>
+                    <h5 class="timeline__meta">Python Developer</h5>
+                    <p class="timeline__timeframe">January 2024 – February 2025</p>
+                  </div>
+                  <div class="timeline__desc">
+                    <p>Worked on backend development, data automation, and web application features for data-driven projects. Contributed to API development, workflow automation, containerized deployments, and data processing pipelines while collaborating on cloud and DevOps-related tasks.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-lg-6 mb-5">
+              <h2 class="text-pretitle gsap-reveal">Education</h2>
+              <div class="timeline">
+
+                <div class="timeline__block gsap-reveal">
+                  <div class="timeline__bullet"></div>
+                  <div class="timeline__header">
+                    <h4 class="timeline__title">Devi Ahilya Vishwavidyalaya, Indore</h4>
+                    <h5 class="timeline__meta">Master of Technology in Computer Science</h5>
+                    <p class="timeline__timeframe">June 2023 – May 2025</p>
+                  </div>
+                  <div class="timeline__desc">
+                    <p>Specialized in software engineering, machine learning, distributed systems, and cloud computing. Worked on AI-powered applications, scalable backend systems, and research focused on data processing and intelligent solutions.</p>
+                  </div>
+                </div>
+
+                <div class="timeline__block gsap-reveal">
+                  <div class="timeline__bullet"></div>
+                  <div class="timeline__header">
+                    <h4 class="timeline__title">Sri Aurobindo Institute of Technology, Indore</h4>
+                    <h5 class="timeline__meta">Bachelor of Technology in Computer Science</h5>
+                    <p class="timeline__timeframe">July 2019 – May 2023</p>
+                  </div>
+                  <div class="timeline__desc">
+                    <p>Built a strong foundation in programming, software development, system design, and problem-solving while exploring backend engineering, cloud technologies, and real-world application development.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="unslate_co--section" id="knowledge-section">
+        <div class="container">
+          <div class="section-heading-wrap text-center mb-5">
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Knowledge</span></h2>
+            <span class="gsap-reveal"><img src="{% static 'images/divider.png' %}" alt="divider" width="76"></span>
+          </div>
+
+          <div class="row gutter-v4 justify-content-center">
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-cogs"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Backend Development</h3>
+                  <p>Worked on backend systems using Python, Django, FastAPI, and Flask while building APIs, automation tools, and data-processing applications. Experienced in developing scalable REST APIs, handling databases like PostgreSQL and MongoDB, and building real-world backend solutions for enterprise and analytics-based projects.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-cloud"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Infrastructure & DevOps</h3>
+                  <p>Worked with AWS services including EC2, S3, Lambda, CloudWatch, and VPC along with Docker, Kubernetes, and CI/CD workflows. Built deployment pipelines using GitHub Actions and GitLab CI/CD while managing server-side deployments, automation scripts, and cloud-based infrastructure environments.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="feature-v1 d-flex">
+                <div class="icon-wrap mr-3">
+                  <span class="icon-lightbulb-o"></span>
+                </div>
+                <div class="text">
+                  <h3 class="heading-h3">Machine Learning</h3>
+                  <p>Built and experimented with Machine Learning and data-processing systems using TensorFlow, PyTorch, and Scikit-learn. Worked on recommendation systems, prediction models, ETL pipelines, data scraping, feature engineering, and analytics workflows focused on intelligent and automation-driven applications.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
       <div class="unslate_co--section" id="portfolio-section">
         <div class="container">
@@ -326,190 +465,176 @@
         </div>
       </div>
 
-      <div class="unslate_co--section" id="services-section">
-        <div class="container">
 
+
+      <style>
+        .skill-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 15px;
+          padding: 30px;
+          height: 100%;
+          transition: all 0.3s ease;
+        }
+        .skill-card:hover {
+          transform: translateY(-10px);
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.2);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .skill-card .icon-wrap {
+          font-size: 40px;
+          margin-bottom: 20px;
+          display: inline-block;
+          color: #fff;
+        }
+        .skill-card h3 {
+          font-size: 20px;
+          margin-bottom: 15px;
+          font-weight: 700;
+          color: #fff;
+        }
+        .skill-card p {
+          font-size: 14px;
+          line-height: 1.6;
+          color: #aaa;
+          margin-bottom: 20px;
+        }
+        .tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .tech-tag {
+          background: rgba(255, 255, 255, 0.08);
+          color: #fff;
+          padding: 5px 12px;
+          border-radius: 50px;
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: all 0.2s ease;
+        }
+        .tech-tag:hover {
+          background: #fff;
+          color: #000;
+        }
+      </style>
+
+      <div class="unslate_co--section" id="skills-section">
+        <div class="container">
           <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">My Services</span></h2>
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Skills & Expertise</span></h2>
             <span class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
           </div>
 
-          <div class="row gutter-v3">
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="0">
-                <div class="wrap-icon mb-3">
-                  <img src="images/svg/001-options.svg" alt="Image" width="45">
+          <div class="row gutter-v4">
+            
+            <!-- Backend -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-cogs"></span></div>
+                <h3>Backend Systems</h3>
+                <p>Building scalable, performance-focused architectures with a focus on clean code and production reliability.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Django</span>
+                  <span class="tech-tag">FastAPI</span>
+                  <span class="tech-tag">Flask</span>
+                  <span class="tech-tag">DRF</span>
+                  <span class="tech-tag">REST APIs</span>
                 </div>
-                <h3>Digital <br> Strategy</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="100">
-                <div class="wrap-icon mb-3">
-                  <img src="images/svg/002-chat.svg" alt="Icon" width="45">
-                </div>
-                <h3>Web <br> Design</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="200">
-                <div class="wrap-icon mb-3">
-                  <img src="images/svg/003-contact-book.svg" alt="Image" class="img-fluid" width="45">
-                </div>
-                <h3>User <br> Experience</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-              </div> 
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="0">
-                <div class="wrap-icon mb-3">
-                  <img src="images/svg/004-percentage.svg" alt="Image" width="45">
-                </div>
-                <h3>Web <br> Development</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="100">
-                <div class="wrap-icon mb-3">
-                  <img src="images/svg/006-goal.svg" alt="Image" width="45">
-                </div>
-                <h3>WordPress <br> Solutions</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="200">
-                <div class="wrap-icon mb-3">
-                  <img src="images/svg/005-line-chart.svg" alt="Image" width="45">
-                </div>
-                <h3>Mobile <br> Applications</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-              </div> 
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-
-      <div class="unslate_co--section section-counter" id="skills-section">
-        <div class="container">
-          <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">My Skills</span></h2>
-            <span class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
-          </div>
-
-
-          <div class="row pt-5">
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="90">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">WordPress</span>
               </div>
             </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="99">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">HTML/CSS</span>
+
+            <!-- Cloud & DevOps -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-cloud"></span></div>
+                <h3>Cloud & DevOps</h3>
+                <p>Managing cloud-native infrastructure with automated CI/CD pipelines and containerized deployments.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">AWS</span>
+                  <span class="tech-tag">Docker</span>
+                  <span class="tech-tag">Kubernetes</span>
+                  <span class="tech-tag">GitHub Actions</span>
+                  <span class="tech-tag">Linux</span>
+                </div>
               </div>
             </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="95">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">jQuery</span>
+
+            <!-- ML & AI -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-lightbulb-o"></span></div>
+                <h3>AI & Machine Learning</h3>
+                <p>Developing intelligent models and predictive systems using modern deep learning and data processing techniques.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">TensorFlow</span>
+                  <span class="tech-tag">PyTorch</span>
+                  <span class="tech-tag">Scikit-learn</span>
+                  <span class="tech-tag">CNNs</span>
+                  <span class="tech-tag">Pandas</span>
+                </div>
               </div>
             </div>
-            <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-              <div class="counter-v1 text-center">
-                <span class="number-wrap">
-                  <span class="number number-counter" data-number="100">0</span>
-                  <span class="append-text">%</span>
-                </span>
-                <span class="counter-label">Design</span>
+
+            <!-- Data Engineering -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-bar-chart"></span></div>
+                <h3>Data Engineering</h3>
+                <p>Designing robust ETL pipelines and transforming raw data into actionable insights through analytics.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">PySpark</span>
+                  <span class="tech-tag">SQL</span>
+                  <span class="tech-tag">ETL</span>
+                  <span class="tech-tag">Streamlit</span>
+                  <span class="tech-tag">Plotly Dash</span>
+                </div>
               </div>
             </div>
+
+            <!-- Databases -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-database"></span></div>
+                <h3>System Design</h3>
+                <p>Architecting database solutions for high-performance applications with optimized query handling.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">PostgreSQL</span>
+                  <span class="tech-tag">MongoDB</span>
+                  <span class="tech-tag">Redis</span>
+                  <span class="tech-tag">MySQL</span>
+                  <span class="tech-tag">SQLite</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Workflow -->
+            <div class="col-md-6 col-lg-4 mb-4 gsap-reveal">
+              <div class="skill-card">
+                <div class="icon-wrap"><span class="icon-git"></span></div>
+                <h3>Engineering Workflow</h3>
+                <p>Following industry best practices for collaborative development, testing, and documentation.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Git</span>
+                  <span class="tech-tag">Postman</span>
+                  <span class="tech-tag">Swagger</span>
+                  <span class="tech-tag">Jira</span>
+                  <span class="tech-tag">Agile</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
       <!-- END .counter -->
 
-      <div class="unslate_co--section" id="testimonial-section">
-        <div class="container">
-          <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">My Happy Clients</span></h2>
-            <span class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
-          </div>
-        </div>
 
-        <div class="owl-carousel testimonial-slider">
-          <div>
-            <div class="testimonial-v1">
-              <div class="testimonial-inner-bg">
-                <span class="quote">&ldquo;</span>
-                <blockquote>
-                  Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-                </blockquote>
-              </div>
-              
-              <div class="testimonial-author-info">
-                <img src="images/person_man_1.jpg" alt="Image">
-                <h3>Eric Ingram</h3>
-                <span class="d-block position">Product Designer @facebook</span>
-              </div>
-
-            </div>
-          </div>
-          <div>
-            <div class="testimonial-v1">
-              <div class="testimonial-inner-bg">
-                <span class="quote">&ldquo;</span>
-                <blockquote>
-                  Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-                </blockquote>
-              </div>
-              
-              <div class="testimonial-author-info">
-                <img src="images/person_man_2.jpg" alt="Image">
-                <h3>Ryan Mullins</h3>
-                <span class="d-block position">Product Designer @Shopify</span>
-              </div>
-
-            </div>
-          </div>
-          <div>
-            <div class="testimonial-v1">
-              <div class="testimonial-inner-bg">
-                <span class="quote">&ldquo;</span>
-                <blockquote>
-                  Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-                </blockquote>
-              </div>
-              
-              <div class="testimonial-author-info">
-                <img src="images/person_woman_1.jpg" alt="Image">
-                <h3>Erica Miller</h3>
-                <span class="d-block position">Product Designer @Twitter</span>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <!-- END testimonial -->
 
       <div class="unslate_co--section" id="journal-section">
         <div class="container">
@@ -691,6 +816,7 @@
 
     <script src="js/scripts-dist.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/hero-animation.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157808202-1"></script>

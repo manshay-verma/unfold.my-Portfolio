@@ -1,0 +1,27 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}Resume{% endblock %}
+{% block page_title_header %}Resume{% endblock %}
+{% block nav_resume %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Resume</h2>
+</div>
+<div class="panel-card" style="max-width:560px;">
+  {% if obj.pdf %}
+  <div style="margin-bottom:20px;padding:16px;background:var(--surface2);border-radius:10px;display:flex;align-items:center;gap:12px;">
+    <i class="fa-solid fa-file-pdf" style="font-size:28px;color:var(--danger)"></i>
+    <div>
+      <p style="margin:0;font-size:13px;font-weight:500;">Current Resume PDF</p>
+      <a href="{{ obj.pdf.url }}" target="_blank" style="font-size:12px;color:var(--accent2)">View / Download</a>
+    </div>
+  </div>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include "admin-panel/includes/form_fields.html" with form=form %}
+    <p style="font-size:12px;color:var(--muted);margin-top:-12px;margin-bottom:20px;">Uploading a new PDF will replace the existing one.</p>
+    <button type="submit" class="btn-panel btn-primary-panel"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+  </form>
+</div>
+{% endblock %}

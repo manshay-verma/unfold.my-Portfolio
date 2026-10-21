@@ -1,0 +1,40 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}Social Links{% endblock %}
+{% block page_title_header %}Social Links{% endblock %}
+{% block nav_social %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Social Links</h2>
+  <a href="{% url 'admin_panel:social-add' %}" class="btn-panel btn-primary-panel"><i class="fa-solid fa-plus"></i> Add Link</a>
+</div>
+<div class="panel-card">
+  {% if items %}
+  <table class="panel-table">
+    <thead>
+      <tr><th>Platform</th><th>URL</th><th>Icon</th><th>Order</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><strong>{{ item.platform }}</strong></td>
+        <td><a href="{{ item.url }}" target="_blank" style="color:var(--accent2);font-size:12px;">{{ item.url|truncatechars:40 }}</a></td>
+        <td style="color:var(--muted);font-size:12px;">{{ item.icon|default:"—" }}</td>
+        <td><span class="badge-panel badge-muted">{{ item.display_order }}</span></td>
+        <td>
+          <div style="display:flex;gap:8px;">
+            <a href="{% url 'admin_panel:social-edit' item.pk %}" class="btn-panel btn-secondary-panel btn-sm-panel"><i class="fa-solid fa-pen"></i> Edit</a>
+            <form method="post" action="{% url 'admin_panel:social-delete' item.pk %}" style="display:inline;" onsubmit="return confirm('Delete?')">
+              {% csrf_token %}<button type="submit" class="btn-panel btn-danger-panel btn-sm-panel"><i class="fa-solid fa-trash"></i></button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state"><i class="fa-solid fa-share-nodes"></i>No social links yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

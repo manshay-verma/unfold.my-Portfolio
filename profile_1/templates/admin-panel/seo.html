@@ -1,0 +1,23 @@
+{% extends "admin-panel/base.html" %}
+{% block page_title %}SEO Settings{% endblock %}
+{% block page_title_header %}SEO Settings{% endblock %}
+{% block nav_seo %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>SEO Settings</h2>
+</div>
+<div class="panel-card" style="max-width:680px;">
+  {% if obj.favicon %}
+  <div style="margin-bottom:20px;">
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Current Favicon</p>
+    <img src="{{ obj.favicon.url }}" style="width:48px;height:48px;object-fit:contain;border-radius:8px;background:var(--surface2);padding:4px;" alt="favicon">
+  </div>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include "admin-panel/includes/form_fields.html" with form=form %}
+    <button type="submit" class="btn-panel btn-primary-panel"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+  </form>
+</div>
+{% endblock %}
