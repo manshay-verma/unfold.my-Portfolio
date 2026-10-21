@@ -11,4 +11,5 @@ setuptools==83.0.0,
 sqlparse==0.5.5,
 tzdata==2026.3,
 wheel==0.47.0,
-gunicorn==25.0.0
+gunicorn==26.2.0,
+whitenoise==6.12.0
