@@ -25,6 +25,7 @@ class JournalForm(forms.ModelForm):
         widgets = {
             "publish_date": forms.DateInput(attrs={"type": "date"}),
             "excerpt": forms.Textarea(attrs={"rows": 3}),
+            "content": forms.Textarea(attrs={"rows": 14}),
             "external_urls": forms.Textarea(attrs={"rows": 2, "placeholder": '[{"title": "Medium", "url": "https://medium.com/..."}]'}),
         }
 

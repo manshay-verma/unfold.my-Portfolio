@@ -2,7 +2,6 @@ import os
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
-from ckeditor.fields import RichTextField
 
 
 # ──────────────────────────────────────────
@@ -267,7 +266,7 @@ class Journal(models.Model):
     publish_date = models.DateField(default=timezone.now, blank=True, null=True, help_text='Publication Date')
     image = models.ImageField(upload_to='journal/', blank=True, null=True)
     excerpt = models.TextField(help_text='Short description for the popup preview')
-    content = RichTextField(help_text='Full article content')
+    content = models.TextField(help_text='Full article content (HTML is supported)')
     external_urls = models.JSONField(default=list, blank=True, help_text='List of external links e.g. [{"title": "Medium", "url": "https://..."}]')
     display_order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
