@@ -125,12 +125,15 @@ SKILL_CATEGORY_CHOICES = [
     ("Cloud", "Cloud"),
     ("Database", "Database"),
     ("DevOps", "DevOps"),
+    ("CS Fundamentals", "CS Fundamentals"),
+    ("Tools & Automation", "Tools & Automation"),
+    ("Other", "Other"),
 ]
 
 
 class Skill(models.Model):
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=50, choices=SKILL_CATEGORY_CHOICES)
+    category = models.CharField(max_length=50, choices=SKILL_CATEGORY_CHOICES, default="Backend")
     description = models.TextField(blank=True)
     percentage = models.PositiveIntegerField(default=0, help_text="0–100")
     icon = models.CharField(max_length=100, blank=True, help_text="Icon class name, e.g. icon-cogs")

@@ -60,7 +60,12 @@ class AboutForm(forms.ModelForm):
 class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
-        fields = ["name", "category", "percentage", "icon", "display_order"]
+        fields = ["name", "category", "percentage", "icon", "description", "display_order"]
+        widgets = {
+            "description": forms.Textarea(attrs={"rows": 3, "placeholder": "Enter skill details, frameworks, tools (e.g., Python, FastAPI, Django, PostgreSQL...)"}),
+            "icon": forms.TextInput(attrs={"placeholder": "FontAwesome class name e.g. fa-solid fa-code, fa-brands fa-python, fa-solid fa-brain"}),
+            "name": forms.TextInput(attrs={"placeholder": "e.g. Python & Backend Engineering"}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

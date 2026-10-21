@@ -27,7 +27,18 @@
             <span style="font-size:12px;color:var(--muted);">{{ item.percentage }}%</span>
           </div>
         </td>
-        <td style="color:var(--muted);font-size:12px;">{{ item.icon|default:"—" }}</td>
+        <td>
+          {% if item.icon %}
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:32px;height:32px;border-radius:6px;background:rgba(129,140,248,0.15);border:1px solid rgba(129,140,248,0.3);display:flex;align-items:center;justify-content:center;">
+                <i class="{{ item.icon }}" style="font-size:16px;color:#818cf8;"></i>
+              </div>
+              <span style="font-size:12px;color:var(--muted);font-family:monospace;">{{ item.icon }}</span>
+            </div>
+          {% else %}
+            <span style="color:var(--muted);">—</span>
+          {% endif %}
+        </td>
         <td><span class="badge-panel badge-muted">{{ item.display_order }}</span></td>
         <td>
           <div style="display:flex;gap:8px;">

@@ -73,24 +73,69 @@
     }
   }
 
+  function triggerGsapReveal(container) {
+    if (typeof jQuery === 'undefined' || !container) return;
+    var $ = jQuery;
+    var $reveals = $(container).find('.gsap-reveal');
+    $reveals.each(function() {
+      if (!$(this).find('.cover').length) {
+        $(this).append('<span class="cover"></span>');
+      }
+    });
+
+    if (typeof ScrollMagic !== 'undefined' && typeof TimelineMax !== 'undefined') {
+      try {
+        var controller = window.controller || new ScrollMagic.Controller();
+        $reveals.each(function() {
+          if ($(this).data('gsap-bound')) return;
+          $(this).data('gsap-bound', true);
+          var cover = $(this).find('.cover');
+          var tl = new TimelineMax();
+          tl.fromTo(cover, 1.5, { skewX: 0 }, { xPercent: 101, transformOrigin: "0% 100%", ease: Expo.easeInOut });
+          new ScrollMagic.Scene({
+            triggerElement: this,
+            triggerHook: 0.85,
+            reverse: false
+          })
+          .setTween(tl)
+          .addTo(controller);
+        });
+      } catch (err) {
+        console.log("GSAP trigger error:", err);
+      }
+    }
+  }
+
   /* ── About ────────────────────────────────────────────────────── */
 
   function renderAbout(about) {
     if (!about || (!about.title && !about.description)) return;
 
-    var titleEl = qs('#about-section .heading-h3 .gsap-reveal, #about-section h3 .gsap-reveal');
-    if (titleEl && about.title) titleEl.textContent = about.title;
-
-    var descEls = qsa('#about-section .col-lg-4 p.gsap-reveal');
-    if (descEls.length > 0 && about.description) {
-      descEls[0].textContent = about.description;
+    var titleWrap = el('about-title-wrap');
+    if (titleWrap && about.title) {
+      titleWrap.style.fontSize = '28px';
+      titleWrap.style.fontWeight = '700';
+      titleWrap.style.lineHeight = '1.4';
+      titleWrap.style.color = '#ffffff';
+      titleWrap.style.marginBottom = '24px';
+      titleWrap.innerHTML = '<span class="gsap-reveal">' + about.title + '</span>';
+      triggerGsapReveal(titleWrap);
     }
 
-    // CV / resume link inside about
-    var cvBtn = qs('#about-section a.btn-outline-pill');
-    if (cvBtn) {
-      // Will be overridden once resume data arrives, but point to api for now
-      cvBtn.href = '/api/resume/';
+    var descWrap = el('about-description-wrap');
+    if (descWrap && about.description) {
+      var rawParagraphs = about.description.split(/\r?\n+/);
+      var validParagraphs = [];
+      for (var i = 0; i < rawParagraphs.length; i++) {
+        var trimmed = rawParagraphs[i].trim();
+        if (trimmed) validParagraphs.push(trimmed);
+      }
+      if (validParagraphs.length > 0) {
+        descWrap.innerHTML = validParagraphs.map(function (pText, idx) {
+          return '<p class="mb-4 gsap-reveal" style="font-size: 18px; line-height: 32px; color: rgba(255, 255, 255, 0.85); font-weight: 400; margin-bottom: 24px;">' + pText + '</p>';
+        }).join('');
+        triggerGsapReveal(descWrap);
+      }
     }
 
     // About image
@@ -150,6 +195,7 @@
         '<div class="timeline__desc"><p>' + (exp.description || '') + '</p>' + techHtml + '</div>' +
         '</div>';
     }).join('');
+    triggerGsapReveal(container);
   }
 
   /* ── Education Timeline ────────────────────────────────────────── */
@@ -181,6 +227,7 @@
         '<div class="timeline__desc"><p>' + (edu.description || '') + '</p>' + specHtml + '</div>' +
         '</div>';
     }).join('');
+    triggerGsapReveal(container);
   }
 
   /* ── Skills ────────────────────────────────────────────────────── */
@@ -194,7 +241,7 @@
       var desc = s.description || '';
       var categoryBadge = s.category ? '<span style="display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; color: #a78bfa; background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); padding: 4px 12px; border-radius: 20px;">' + s.category + '</span>' : '';
 
-      return '<div class="col-md-6 col-lg-4 mb-4">' +
+      return '<div class="col-md-6 col-lg-4 mb-4 gsap-reveal">' +
         '<div class="feature-v1" style="height: 100%; display: flex; flex-direction: column; background: #13161e; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; transition: transform 0.3s ease, border-color 0.3s ease;">' +
         '<div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 16px;">' +
         '<div class="wrap-icon" style="margin-bottom: 0;">' +
@@ -205,10 +252,12 @@
         '<h3 style="font-size: 17px; font-weight: 600; color: #f8fafc; margin-bottom: 10px;">' + s.name + '</h3>' +
         '<p style="font-size: 13.5px; color: #94a3b8; line-height: 1.6; margin-bottom: 20px; flex: 1;">' + desc + '</p>' +
         '<div class="skill-percentage-bar" style="margin-top: auto; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden;">' +
-        '<div class="skill-percentage-fill" style="width: ' + s.percentage + '%; height: 100%; background: linear-gradient(90deg, #7c6af5, #a78bfa); border-radius: 10px;"></div>' +
+        '<div class="skill-percentage-fill" style="width: ' + s.percentage + '%; height: 100%; background: linear-gradient(90deg, #7c6af5, #a78bfa); border-radius: 10px; transition: width 1.2s ease;"></div>' +
         '</div>' +
         '</div></div>';
     }).join('');
+
+    triggerGsapReveal(container);
   }
 
   function renderProjects(projects) {
@@ -228,17 +277,19 @@
       var href = '/portfolio-single/' + proj.slug + '/';
       var portrait = idx % 3 === 1 ? ' item-portrait' : '';
       
-        var fallbackHtml = '<div style="width:100%; aspect-ratio: 4/3; background:#222; display:flex; align-items:center; justify-content:center;"><i class="icon-image" style="font-size:40px;color:#555;"></i></div>';
+        var fallbackHtml = '<div style="width:100%; aspect-ratio: 4/3; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-code" style="font-size:38px; color:rgba(255,255,255,0.35);"></i></div>';
         
+        var techText = proj.short_description || (Array.isArray(proj.tech_stack) ? proj.tech_stack.join(', ') : '');
+
         return '<div class="item ' + cls + ' col-sm-6 col-md-6 col-lg-4 isotope-mb-2">' +
-          '<a href="' + href + '" class="portfolio-item' + portrait + ' isotope-item gsap-reveal-img" data-slug="' + proj.slug + '">' +
-          '<div class="overlay">' +
-          '<span class="wrap-icon icon-link2"></span>' +
-          '<div class="portfolio-item-content">' +
-          '<h3>' + proj.title + '</h3>' +
-          '<p>' + (proj.short_description || '') + '</p>' +
+          '<a href="' + href + '" class="portfolio-item' + portrait + ' isotope-item gsap-reveal-img" data-slug="' + proj.slug + '" style="border-radius: 14px; overflow: hidden; display: block; position: relative;">' +
+          '<div class="overlay" style="display:flex; flex-direction:column; justify-content:space-between; padding:22px; background: linear-gradient(to top, rgba(15, 17, 26, 0.95) 0%, rgba(15, 17, 26, 0.4) 60%, rgba(15, 17, 26, 0.2) 100%); transition: all 0.3s ease;">' +
+          '<div style="display:flex; justify-content:flex-end;"><span class="wrap-icon" style="font-size:14px; color:#a78bfa; background:rgba(167, 139, 250, 0.2); border: 1px solid rgba(167, 139, 250, 0.3); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></div>' +
+          '<div class="portfolio-item-content" style="position:relative; bottom:auto; left:auto; right:auto; padding:0; margin:0; width:100%;">' +
+          '<h3 style="font-size:16px; font-weight:700; color:#f8fafc; margin:0 0 6px 0; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">' + proj.title + '</h3>' +
+          '<p style="font-size:12px; font-weight:600; color:#a78bfa; margin:0; line-height:1.4; text-transform:uppercase; letter-spacing:0.5px; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden;">' + techText + '</p>' +
           '</div></div>' +
-          (imgSrc ? '<img src="' + imgSrc + '" class="lazyload img-fluid" alt="' + proj.title + '">' : fallbackHtml) +
+          (imgSrc ? '<img src="' + imgSrc + '" class="lazyload img-fluid" alt="' + proj.title + '" style="width:100%; height:100%; object-fit:cover;">' : fallbackHtml) +
           '</a></div>';
     }).join('');
 
@@ -252,8 +303,46 @@
     });
 
     // Re-initialise isotope if already loaded
-    if (typeof jQuery !== 'undefined' && jQuery('#posts').data('isotope')) {
-      jQuery('#posts').isotope('reloadItems').isotope();
+    if (typeof jQuery !== 'undefined') {
+      var $ = jQuery;
+      if ($('#posts').data('isotope')) {
+        $('#posts').isotope('reloadItems').isotope();
+      }
+      $('#posts .gsap-reveal-img').each(function() {
+        if (!$(this).find('.reveal-wrap').length) {
+          var html = $(this).html();
+          $(this).html('<div class="reveal-wrap"><span class="cover"></span><div class="reveal-content">'+html+'</div></div>');
+        }
+      });
+      if (typeof ScrollMagic !== 'undefined' && typeof TimelineMax !== 'undefined') {
+        try {
+          var controller = window.controller || new ScrollMagic.Controller();
+          $('#posts .gsap-reveal-img').each(function() {
+            var cover = $(this).find('.cover'),
+                revealContent = $(this).find('.reveal-content'),
+                img = $(this).find('.reveal-content img');
+            if (cover.length && !$(this).data('gsap-bound')) {
+              $(this).data('gsap-bound', true);
+              var tl2 = new TimelineMax();
+              tl2.set(img, { scale: '2.0', autoAlpha: 1 })
+                 .to(cover, 0.8, { marginLeft: '0', ease: Expo.easeInOut })
+                 .set(revealContent, { autoAlpha: 1 })
+                 .to(cover, 0.8, { marginLeft: '102%', ease: Expo.easeInOut })
+                 .to(img, 1.5, { scale: '1.0', ease: Expo.easeOut }, '-=1.2');
+
+              new ScrollMagic.Scene({
+                triggerElement: this,
+                triggerHook: 0.85,
+                reverse: false
+              })
+              .setTween(tl2)
+              .addTo(controller);
+            }
+          });
+        } catch (err) {
+          console.log("Project GSAP error:", err);
+        }
+      }
     }
   }
 
@@ -327,7 +416,7 @@
     var container = el('certifications-section') || qs('.certifications-row');
     if (!container || !certs.length) return;
     container.innerHTML = certs.map(function (c) {
-      return '<div class="col-md-6 col-lg-4 mb-4">' +
+      return '<div class="col-md-6 col-lg-4 mb-4 gsap-reveal">' +
         '<div class="feature-v1">' +
         '<div class="wrap-icon mb-3">' +
         (c.certificate_image ? '<img src="' + absUrl(c.certificate_image) + '" style="height:80px; object-fit:contain; margin-bottom:10px;" alt="' + c.title + '">' : '<i class="icon-file-text-o"></i>') +
@@ -337,6 +426,8 @@
         (c.certificate_url ? '<p><a href="' + c.certificate_url + '" target="_blank" class="readmore">View Credential</a></p>' : '') +
         '</div></div>';
     }).join('');
+
+    triggerGsapReveal(container);
   }
 
   /* ── Journal ──────────────────────────────────────────────────── */
@@ -365,7 +456,7 @@
           '</div>';
       }
 
-      return '<div class="col-sm-6 col-md-6 col-lg-4 mb-4" data-aos="fade-up">' +
+      return '<div class="col-sm-6 col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="' + (index * 100) + '">' +
         '<div onclick="openJournalModal(' + index + ')" class="journal-card" style="background:#13161e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; overflow:hidden; height:100%; cursor:pointer; display:flex; flex-direction:column; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">' +
         mediaHtml +
         '<div style="padding: 20px; flex: 1; display: flex; flex-direction: column;">' +
@@ -382,6 +473,10 @@
         '</div>' +
         '</div>';
     }).join('');
+
+    if (typeof AOS !== 'undefined') {
+      AOS.refresh();
+    }
   }
 
   window.closeJournalModal = function() {

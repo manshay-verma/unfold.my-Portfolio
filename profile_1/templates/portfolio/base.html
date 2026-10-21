@@ -16,13 +16,14 @@
     <link rel="stylesheet" href="{% static 'css/vendor/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'css/vendor/jquery.fancybox.min.css'%}">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
     <link rel="stylesheet" href="{% static 'css/hero-animation.css' %}">
     <link rel="stylesheet" href="{% static 'css/portfolio-projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile-touch.css' %}">
     {% block extra_css %}{% endblock %}
     <style>
       .journal-card:hover {
@@ -175,10 +176,13 @@
                 <img src="{% static 'images/about_me_pic2.jpg' %}" alt="Image" class="img-fluid">
               </figure>
             </div>
-            <div class="col-lg-4 pr-lg-5">
-              <h3 class="mb-4 heading-h3"><span class="gsap-reveal">I’m a Software Engineer who loves building complete and scalable solutions.</span></h3>
-              <p class="gsap-reveal">My experience covers Backend Development, Machine Learning, and DevOps, which allows me to work on everything from APIs and automation systems to cloud infrastructure and intelligent applications.</p>
-              <p class="mb-4 gsap-reveal">I’m always curious to learn new technologies, improve my skills, and build projects that create real impact through software, cloud, and AI.</p>
+            <div class="col-lg-5 pr-lg-5">
+              <h3 class="mb-4 heading-h3" id="about-title-wrap">
+                <!-- Populated by cms-render.js -->
+              </h3>
+              <div id="about-description-wrap">
+                <!-- Populated by cms-render.js -->
+              </div>
               <p class="gsap-reveal"><a href="#" class="btn btn-outline-pill btn-custom-light">Download my CV</a></p>
             </div>
           </div>
@@ -227,62 +231,14 @@
             <div class="col-lg-6 mb-5">
               <h2 class="text-pretitle gsap-reveal">Experience</h2>
               <div class="timeline">
-
-                <div class="timeline__block gsap-reveal">
-                  <div class="timeline__bullet"></div>
-                  <div class="timeline__header">
-                    <h4 class="timeline__title">CubexO Software Solutions</h4>
-                    <h5 class="timeline__meta">Software Engineer</h5>
-                    <p class="timeline__timeframe">May 2025 – Present</p>
-                  </div>
-                  <div class="timeline__desc">
-                    <p>Building scalable backend applications and automation systems using modern development practices. Working on API development, cloud-based workflows, data processing, and deployment pipelines while contributing to reliable and high-performance software solutions. Also involved in DevOps practices, infrastructure management, and system optimization for production environments.</p>
-                  </div>
-                </div>
-
-                <div class="timeline__block gsap-reveal">
-                  <div class="timeline__bullet"></div>
-                  <div class="timeline__header">
-                    <h4 class="timeline__title">Active Now Technologies</h4>
-                    <h5 class="timeline__meta">Python Developer</h5>
-                    <p class="timeline__timeframe">January 2024 – February 2025</p>
-                  </div>
-                  <div class="timeline__desc">
-                    <p>Worked on backend development, data automation, and web application features for data-driven projects. Contributed to API development, workflow automation, containerized deployments, and data processing pipelines while collaborating on cloud and DevOps-related tasks.</p>
-                  </div>
-                </div>
-
+                <!-- Populated by cms-render.js -->
               </div>
             </div>
 
             <div class="col-lg-6 mb-5">
               <h2 class="text-pretitle gsap-reveal">Education</h2>
               <div class="timeline">
-
-                <div class="timeline__block gsap-reveal">
-                  <div class="timeline__bullet"></div>
-                  <div class="timeline__header">
-                    <h4 class="timeline__title">Devi Ahilya Vishwavidyalaya, Indore</h4>
-                    <h5 class="timeline__meta">Master of Technology in Computer Science</h5>
-                    <p class="timeline__timeframe">June 2023 – May 2025</p>
-                  </div>
-                  <div class="timeline__desc">
-                    <p>Specialized in software engineering, machine learning, distributed systems, and cloud computing. Worked on AI-powered applications, scalable backend systems, and research focused on data processing and intelligent solutions.</p>
-                  </div>
-                </div>
-
-                <div class="timeline__block gsap-reveal">
-                  <div class="timeline__bullet"></div>
-                  <div class="timeline__header">
-                    <h4 class="timeline__title">Sri Aurobindo Institute of Technology, Indore</h4>
-                    <h5 class="timeline__meta">Bachelor of Technology in Computer Science</h5>
-                    <p class="timeline__timeframe">July 2019 – May 2023</p>
-                  </div>
-                  <div class="timeline__desc">
-                    <p>Built a strong foundation in programming, software development, system design, and problem-solving while exploring backend engineering, cloud technologies, and real-world application development.</p>
-                  </div>
-                </div>
-
+                <!-- Populated by cms-render.js -->
               </div>
             </div>
 
@@ -345,107 +301,17 @@
           <div class="relative"><div class="loader-portfolio-wrap"><div class="loader-portfolio"></div></div> </div>
           <div id="portfolio-single-holder"></div>
 
+          <div class="section-heading-wrap text-center mb-5">
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Projects</span></h2>
+            <span class="gsap-reveal">
+              <img src="{% static 'images/divider.png' %}" alt="divider" width="76">
+            </span>
+          </div>
+
           <div class="portfolio-wrapper">
-
-            <div class="d-flex align-items-center mb-4 gsap-reveal gsap-reveal-filter">
-              <h2 class="mr-auto heading-h2"><span class="gsap-reveal">Projects</span></h2>
-
-              <!-- <a href="#" class="text-white js-filter d-inline-block d-lg-none">Filter</a>
-              
-              <div class="filter-wrap">
-                <div class="filter ml-auto" id="filters">
-                  <a href="#" class="active" data-filter="*">All</a>
-                  <a href="#" data-filter=".web">Web</a>
-                  <a href="#" data-filter=".branding">Branding</a>
-                  <a href="#" data-filter=".illustration">Illustration</a>
-                  <a href="#" data-filter=".packaging">Packaging</a>
-                </div>
-              </div> -->
-            </div>
-
-
-            
             <div id="posts" class="row gutter-isotope-item">
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% url 'portfolio_single' 'portfolio-single-1' %}" class="portfolio-item ajax-load-page isotope-item gsap-reveal-img" data-id="1">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Vi Telecom Analytics</h3>
-                        <p>Enterprise Backend, Data Engineering</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_1_md.jpg' %}" class="lazyload  img-fluid" alt="Vi Telecom Analytics System" />
-                  </a>
-              </div>
-
-              <div class="item branding packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% url 'portfolio_single' 'portfolio-single-2' %}" class="portfolio-item ajax-load-page item-portrait isotope-item gsap-reveal-img" data-id="2">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Harman Studio Cloud</h3>
-                        <p>Cloud Infrastructure, SaaS Backend</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_2_md.jpg' %}" class="lazyload  img-fluid" alt="Harman Studio Cloud Platform" />
-                  </a>
-              </div>
-
-              <div class="item web packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% url 'portfolio_single' 'portfolio-single-3' %}" class="portfolio-item ajax-load-page isotope-item gsap-reveal-img" data-id="3">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>BMP Book</h3>
-                        <p>Mobile App, Real-Time Platform</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_3_md.jpg' %}" class="lazyload  img-fluid" alt="BMP Book Booking Platform" />
-                  </a>
-              </div>
-
-              <div class="item illustration packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% url 'portfolio_single' 'portfolio-single-4' %}" class="portfolio-item ajax-load-page isotope-item gsap-reveal-img" data-id="4">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Smart Activity Tracker</h3>
-                        <p>AI, Desktop App, Computer Vision</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_4_full.jpg' %}" class="lazyload  img-fluid" alt="Smart Desktop Activity Tracker" />
-                  </a>
-              </div>
-
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% url 'portfolio_single' 'portfolio-single-5' %}" class="portfolio-item ajax-load-page isotope-item gsap-reveal-img" data-id="5">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Text Analysis System</h3>
-                        <p>Automation, NLP, Data Processing</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_5_md.jpg' %}" class="lazyload  img-fluid" alt="Web Scraping Text Analysis" />
-                  </a>
-              </div>
-
-              <div class="item branding packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="{% url 'portfolio_single' 'portfolio-single-6' %}" class="portfolio-item ajax-load-page item-portrait isotope-item gsap-reveal-img" data-id="6">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>MUSLEEASE E-Commerce</h3>
-                        <p>Full-Stack, MERN E-Commerce</p>
-                      </div>
-                    </div>
-                    <img src="{% static 'images/work_6_md.jpg' %}" class="lazyload  img-fluid" alt="MUSLEEASE E-Commerce Platform" />
-                  </a>
-              </div>
-
+              <!-- Populated by cms-render.js -->
             </div>
-            
           </div>
 
 
@@ -621,7 +487,7 @@
     <script src="{% static 'js/scripts-dist.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/hero-animation.js' %}"></script>
-    <script src="{% static 'js/cms-render.js' %}?v=3"></script>
+    <script src="{% static 'js/cms-render.js' %}?v=4"></script>
     <!-- Journal Preview Modal -->
     <div class="modal fade" id="journalModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -649,6 +515,58 @@
         </div>
       </div>
     </div>
+
+    <!-- Touch interaction for mobile/tablet hover effects -->
+    <script>
+    (function() {
+      var TOUCH_SELECTORS = [
+        '.portfolio-item',
+        '.feature-v1',
+        '.cert-card-v2',
+        '.journal-card',
+        '.project-detail-card'
+      ];
+
+      function bindTouch(el) {
+        if (el._touchBound) return;
+        el._touchBound = true;
+        var timer;
+
+        el.addEventListener('touchstart', function() {
+          el.classList.add('is-touched');
+          clearTimeout(timer);
+        }, { passive: true });
+
+        el.addEventListener('touchend', function() {
+          timer = setTimeout(function() {
+            el.classList.remove('is-touched');
+          }, 350);
+        }, { passive: true });
+
+        el.addEventListener('touchcancel', function() {
+          el.classList.remove('is-touched');
+        }, { passive: true });
+      }
+
+      function attachTouchListeners() {
+        TOUCH_SELECTORS.forEach(function(sel) {
+          document.querySelectorAll(sel).forEach(bindTouch);
+        });
+      }
+
+      // Run on load and after CMS data is rendered (observe DOM changes)
+      document.addEventListener('DOMContentLoaded', function() {
+        attachTouchListeners();
+
+        // MutationObserver to catch dynamically injected elements from cms-render.js
+        var observer = new MutationObserver(function(mutations) {
+          var hasNew = mutations.some(function(m) { return m.addedNodes.length > 0; });
+          if (hasNew) attachTouchListeners();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      });
+    })();
+    </script>
 
   </body>
 </html>

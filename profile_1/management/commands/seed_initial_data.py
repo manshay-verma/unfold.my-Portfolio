@@ -1,19 +1,19 @@
 """
 Management command: seed_initial_data
-Seeds the DB with the hardcoded content that previously lived in base.html.
-Run once: python manage.py seed_initial_data
-Safe to re-run — uses get_or_create / update_or_create patterns.
+Seeds the DB with all current portfolio content.
+Run once or whenever DB is reset: python manage.py seed_initial_data
+Safe to re-run — updates existing records or creates them cleanly.
 """
 
 from django.core.management.base import BaseCommand
 from profile_1.models import (
     Hero, About, Experience, Education,
-    Skill, Project, Contact, SEO, SocialLink,
+    Skill, Project, Certification, Contact, SEO, SocialLink, Journal
 )
 
 
 class Command(BaseCommand):
-    help = "Seeds the database with the initial hardcoded portfolio content."
+    help = "Seeds the database with all portfolio content."
 
     def handle(self, *args, **kwargs):
         self._seed_hero()
@@ -22,42 +22,42 @@ class Command(BaseCommand):
         self._seed_education()
         self._seed_skills()
         self._seed_projects()
+        self._seed_certifications()
         self._seed_contact()
         self._seed_seo()
         self._seed_social()
+        self._seed_journals()
         self.stdout.write(self.style.SUCCESS("OK  Initial data seeded successfully."))
 
     # ── Hero ────────────────────────────────────────────────────────────
     def _seed_hero(self):
         hero = Hero.load()
-        if not hero.name:
-            hero.name = "Manshay"
-            hero.designation = "Software Engineer"
-            hero.headline = "I'm Manshay Verma, a Software Engineer who loves building complete and scalable solutions."
-            hero.description = "My experience covers Backend Development, Machine Learning, and DevOps."
-            hero.save()
-            self.stdout.write("  Hero seeded.")
+        hero.name = "Manshay"
+        hero.designation = "Software Engineer"
+        hero.headline = "I’m Manshay Verma, a Software Engineer based in India."
+        hero.description = "Specializing in FastAPI, Django REST Framework, LangGraph, CrewAI, RAG pipelines, and AWS cloud infrastructure."
+        hero.save()
+        self.stdout.write("  Hero seeded.")
 
     # ── About ───────────────────────────────────────────────────────────
     def _seed_about(self):
         about = About.load()
-        if not about.title:
-            about.title = "I'm a Software Engineer who loves building complete and scalable solutions."
-            about.description = (
-                "My experience covers Backend Development, Machine Learning, and DevOps, "
-                "which allows me to work on everything from APIs and automation systems "
-                "to cloud infrastructure and intelligent applications.\n\n"
-                "I'm always curious to learn new technologies, improve my skills, and build "
-                "projects that create real impact through software, cloud, and AI."
-            )
-            about.email = "manshayverma01@gmail.com"
-            about.phone = ""
-            about.location = "Indore, India"
-            about.experience_years = 2
-            about.projects_completed = 6
-            about.clients = 3
-            about.save()
-            self.stdout.write("  About seeded.")
+        about.title = "I’m a Software Engineer who loves building complete and scalable solutions."
+        about.description = (
+            "My experience covers Backend Development, Machine Learning, and DevOps, "
+            "which allows me to work on everything from APIs and automation systems "
+            "to cloud infrastructure and intelligent applications.\n\n"
+            "I’m always curious to learn new technologies, improve my skills, and build "
+            "projects that create real impact through software, cloud, and AI."
+        )
+        about.email = "manshayverma01@gmail.com"
+        about.phone = "+91 62649 96677"
+        about.location = "Indore, India"
+        about.experience_years = 2
+        about.projects_completed = 6
+        about.clients = 3
+        about.save()
+        self.stdout.write("  About seeded.")
 
     # ── Experience ──────────────────────────────────────────────────────
     def _seed_experience(self):
@@ -66,41 +66,41 @@ class Command(BaseCommand):
                 "company": "CubexO Software Solutions",
                 "position": "Software Engineer",
                 "location": "Indore, India",
-                "start_date": "May 2025",
-                "end_date": "Present",
+                "start_date": "2025-05-15",
+                "end_date": "2026-05-31",
                 "description": (
-                    "Building scalable backend applications and automation systems using modern "
-                    "development practices. Working on API development, cloud-based workflows, "
-                    "data processing, and deployment pipelines while contributing to reliable and "
-                    "high-performance software solutions. Also involved in DevOps practices, "
-                    "infrastructure management, and system optimization for production environments."
+                    "Built scalable backend applications and automation systems for enterprise products "
+                    "across telecom, SaaS, and audio platform domains. Developed RESTful APIs, automated data "
+                    "processing workflows, designed multi-tenant cloud solutions, and optimized backend performance "
+                    "using FastAPI, Django REST Framework, GraphQL, AWS, and modern DevOps practices."
                 ),
-                "technologies": ["Python", "Django", "FastAPI", "AWS", "Docker", "PostgreSQL"],
-                "display_order": 0,
+                "technologies": ["Python", "Django", "FastAPI", "AWS", "Docker", "PostgreSQL", "MongoAtlas", "Jira", "Github", "Bitbucket"],
+                "display_order": 1,
             },
             {
-                "company": "Active Now Technologies",
-                "position": "Python Developer",
-                "location": "Remote",
-                "start_date": "January 2024",
-                "end_date": "February 2025",
+                "company": "Muscle Ease",
+                "position": "Full Stack Engineer",
+                "location": "Remote - Freelance",
+                "start_date": "2022-02-01",
+                "end_date": "2022-09-29",
                 "description": (
-                    "Worked on backend development, data automation, and web application features "
-                    "for data-driven projects. Contributed to API development, workflow automation, "
-                    "containerized deployments, and data processing pipelines while collaborating "
-                    "on cloud and DevOps-related tasks."
+                    "Independently designed, developed, and deployed a full-stack fitness web application using the MERN stack "
+                    "(MongoDB, Express.js, React, and Node.js). Built responsive frontend interfaces, developed RESTful APIs, "
+                    "and designed the database architecture. Implemented secure user authentication along with PayPal payment gateway integration."
                 ),
-                "technologies": ["Python", "Flask", "Docker", "MongoDB", "Selenium"],
-                "display_order": 1,
+                "technologies": ["MongoDB", "Express.js", "React", "Node.js", "JavaScript", "REST API", "PayPal", "JWT", "Authentication"],
+                "display_order": 2,
             },
         ]
         for e in entries:
-            obj, created = Experience.objects.get_or_create(
-                company=e["company"], position=e["position"],
+            company = e["company"]
+            position = e["position"]
+            Education.objects.filter(institute=company, degree=position).delete()
+            Experience.objects.update_or_create(
+                company=company, position=position,
                 defaults=e,
             )
-            if created:
-                self.stdout.write(f"  Experience: {e['company']} seeded.")
+            self.stdout.write(f"  Experience: {company} seeded.")
 
     # ── Education ───────────────────────────────────────────────────────
     def _seed_education(self):
@@ -139,14 +139,11 @@ class Command(BaseCommand):
         for e in entries:
             institute = e["institute"]
             degree = e["degree"]
-            obj, created = Education.objects.update_or_create(
+            Education.objects.update_or_create(
                 institute=institute, degree=degree,
                 defaults=e,
             )
-            if created:
-                self.stdout.write(f"  Education: {degree} seeded.")
-            else:
-                self.stdout.write(f"  Education: {degree} updated.")
+            self.stdout.write(f"  Education: {degree} seeded.")
 
     # ── Skills ──────────────────────────────────────────────────────────
     def _seed_skills(self):
@@ -218,7 +215,25 @@ class Command(BaseCommand):
     def _seed_projects(self):
         projects = [
             {
+                "title": "Autonomous Multi-Agent Research Assistant (LangGraph + RAG)",
+                "slug": "autonomous-multi-agent-research-assistant-langgraph-rag",
+                "short_description": "LangGraph, LangChain, FastAPI, RAG, ChromaDB, Docker",
+                "description": """<p>Architected a LangGraph-based multi-agent system (Supervisor, Researcher, Summarizer, Fact-Checker) that autonomously plans, retrieves, and verifies research information into a cited report, cutting manual research time by ~70% in testing.</p>
+<h4 class="mb-3" style="color: #fff; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; margin-top: 20px;">Key Highlights</h4>
+<ul class="highlight-list">
+  <li>LangGraph Multi-Agent Architecture</li>
+  <li>RAG pipeline with ChromaDB and chunked embeddings (~40% hallucination reduction)</li>
+  <li>Async FastAPI backend with SSE streaming (50+ concurrent sessions)</li>
+  <li>PostgreSQL + Redis session state & agent memory</li>
+  <li>Docker Compose deployment on AWS EC2</li>
+</ul>""",
+                "tech_stack": ["LangGraph", "LangChain", "FastAPI", "PostgreSQL", "Redis", "ChromaDB", "Docker"],
+                "featured": True,
+                "display_order": 0,
+            },
+            {
                 "title": "Vi Telecom Analytics",
+                "slug": "vi-telecom-analytics",
                 "short_description": "Enterprise Backend, Data Engineering",
                 "description": """<p>Built a large-scale telecom analytics and backend automation system using FastAPI, Pandas, Shell Scripting, and Linux-based server environments. Automated enterprise workflows for data ingestion, transformation, formula-based calculations, network analytics, and reporting pipelines while improving operational efficiency and reducing manual processing time.</p>
 <h4 class="mb-3" style="color: #fff; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; margin-top: 20px;">Key Highlights</h4>
@@ -239,7 +254,23 @@ class Command(BaseCommand):
                 "display_order": 0,
             },
             {
+                "title": "Customer Support Multi-Agent System (CrewAI)",
+                "slug": "customer-support-multi-agent-system-crewai",
+                "short_description": "CrewAI, FastAPI, Celery, PostgreSQL, Redis, Docker",
+                "description": """<p>Built a CrewAI-based customer support automation system with 3 specialized agents (Billing, Technical, Refund), achieving an 85% auto-resolution rate on a 500-ticket synthetic dataset.</p>
+<h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Highlights</h4>
+<ul class="highlight-list mb-4">
+  <li>CrewAI multi-agent support workflows</li>
+  <li>Async ticket processing pipeline with Celery & Redis (45% handling time reduction)</li>
+  <li>Context-aware escalation logic cutting resolution time by 30%</li>
+</ul>""",
+                "tech_stack": ["CrewAI", "FastAPI", "Celery", "PostgreSQL", "Redis", "Docker"],
+                "featured": True,
+                "display_order": 1,
+            },
+            {
                 "title": "Harman Studio Cloud",
+                "slug": "harman-studio-cloud",
                 "short_description": "Cloud Infrastructure, SaaS Backend",
                 "description": """<p>Architected and developed a multi-tenant SaaS cloud infrastructure for professional audio studios using FastAPI, GraphQL, and AWS services. Built scalable backend systems to handle complex studio management workflows.</p>
 <h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Highlights</h4>
@@ -255,6 +286,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "BMP Book",
+                "slug": "bmp-book",
                 "short_description": "Mobile App, Real-Time Platform",
                 "description": """<p>Developed a scalable full-stack booking platform connecting users with verified pandits through real-time communication systems, geolocation services, and cloud-based infrastructure using React Native, Django REST Framework, Redis, and AWS integrations.</p>
 <h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
@@ -273,7 +305,36 @@ class Command(BaseCommand):
                 "display_order": 2,
             },
             {
+                "title": "Personal Knowledge Base Agent (RAG + Long-Term Memory)",
+                "slug": "personal-knowledge-base-agent-rag-long-term-memory",
+                "short_description": "LangChain, Weaviate, FastAPI, PostgreSQL",
+                "description": """<p>Built a personal RAG chatbot with long-term memory, storing summarized past conversations as embeddings, improving multi-session context recall by 50%.</p>
+<h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
+<ul class="highlight-list">
+  <li>Multi-format document ingestion (PDF/DOCX/MD) with semantic chunking</li>
+  <li>Weaviate Vector DB & PostgreSQL embeddings storage</li>
+</ul>""",
+                "tech_stack": ["LangChain", "Weaviate", "FastAPI", "PostgreSQL"],
+                "featured": False,
+                "display_order": 2,
+            },
+            {
+                "title": "Multi-Agent Travel/Itinerary Planner (CrewAI)",
+                "slug": "multi-agent-travelitinerary-planner-crewai",
+                "short_description": "CrewAI, FastAPI, Google Maps API, OpenWeatherMap API",
+                "description": """<p>Developed a CrewAI-based multi-agent trip planner (Planner, Budget, Logistics agents) that iteratively refines itineraries, keeping 95% of generated plans within user budget constraints.</p>
+<h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
+<ul class="highlight-list">
+  <li>Google Maps Distance Matrix & OpenWeatherMap API integrations</li>
+  <li>Multi-agent iterative itinerary optimization</li>
+</ul>""",
+                "tech_stack": ["CrewAI", "FastAPI", "PostgreSQL", "Google Maps API", "OpenWeatherMap"],
+                "featured": False,
+                "display_order": 3,
+            },
+            {
                 "title": "Smart Activity Tracker",
+                "slug": "smart-activity-tracker",
                 "short_description": "AI, Desktop App, Computer Vision",
                 "description": """<p>Developed a desktop monitoring and activity analysis application using Qt and OpenCV for capturing and processing detailed information from active desktop windows.</p>
 <h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
@@ -293,6 +354,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Text Analysis System",
+                "slug": "text-analysis-system",
                 "short_description": "Automation, NLP, Data Processing",
                 "description": """<p>Built a Python-based automation system for extracting article data from URLs and performing advanced text-analysis workflows. The system implements robust extraction pipelines using BeautifulSoup and Requests.</p>
 <h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
@@ -312,6 +374,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "MUSLEEASE E-Commerce",
+                "slug": "musleease-e-commerce",
                 "short_description": "Full-Stack, MERN E-Commerce",
                 "description": """<p>Built a comprehensive MERN-stack e-commerce platform for gym and lifestyle products. The platform features a scalable backend and highly responsive shopping workflows designed for a premium user experience.</p>
 <h4 class="mb-3" style="color:#fff;font-size:16px;letter-spacing:1px;text-transform:uppercase; margin-top: 20px;">Key Features</h4>
@@ -330,50 +393,117 @@ class Command(BaseCommand):
                 "display_order": 5,
             },
         ]
+
         for p in projects:
-            title = p.pop("title")
-            _, created = Project.objects.update_or_create(
-                title=title,
-                defaults=p,
-            )
-            if created:
-                self.stdout.write(f"  Project: {title} seeded.")
-            else:
-                self.stdout.write(f"  Project: {title} updated.")
+            slug = p["slug"]
+            Project.objects.update_or_create(slug=slug, defaults=p)
+            self.stdout.write(f"  Project: {slug} seeded.")
+
+    # ── Certifications ──────────────────────────────────────────────────
+    def _seed_certifications(self):
+        certs = [
+            {
+                "title": "Ultimate AWS Certified Solutions Architect Associate",
+                "issuer": "Udemy (Stephane Maarek)",
+                "issue_date": "2023-05-10",
+                "display_order": 0,
+            },
+            {
+                "title": "The Complete Python Developer",
+                "issuer": "Udemy (Andrei Neagoie)",
+                "issue_date": "2023-11-20",
+                "display_order": 1,
+            },
+            {
+                "title": "Complete A.I. & Machine Learning, Data Science Bootcamp",
+                "issuer": "Udemy (Andrei Neagoie, Daniel Bourke)",
+                "issue_date": "2024-01-15",
+                "display_order": 2,
+            },
+        ]
+        for c in certs:
+            title = c["title"]
+            Certification.objects.update_or_create(title=title, defaults=c)
+            self.stdout.write(f"  Certification: {title} seeded.")
 
     # ── Contact ─────────────────────────────────────────────────────────
     def _seed_contact(self):
         contact = Contact.load()
-        if not contact.email:
-            contact.email = "manshayverma01@gmail.com"
-            contact.phone = ""
-            contact.address = "Indore, Madhya Pradesh, India"
-            contact.save()
-            self.stdout.write("  Contact seeded.")
+        contact.email = "manshayverma01@gmail.com"
+        contact.phone = "+91 62649 96677"
+        contact.address = "Indore, India"
+        contact.save()
+        self.stdout.write("  Contact seeded.")
 
     # ── SEO ─────────────────────────────────────────────────────────────
     def _seed_seo(self):
         seo = SEO.load()
-        if not seo.site_title or seo.site_title == "Portfolio":
-            seo.site_title = "Manshay Verma — Software Engineer"
-            seo.meta_description = (
-                "Portfolio of Manshay Verma, a Software Engineer specializing in "
-                "Backend Development, Machine Learning, and Cloud/DevOps."
-            )
-            seo.keywords = "Manshay Verma, Software Engineer, Python, Django, Machine Learning, DevOps, Portfolio"
-            seo.save()
-            self.stdout.write("  SEO seeded.")
+        seo.site_title = "Manshay Verma — Backend & AI/ML Engineer"
+        seo.meta_description = "Portfolio of Manshay Verma, Backend & AI/ML Engineer specializing in FastAPI, Django REST Framework, LangGraph, CrewAI, RAG, and AWS."
+        seo.keywords = "Manshay Verma, Backend Engineer, AI Engineer, FastAPI, Django, LangGraph, CrewAI, RAG, AWS, Portfolio"
+        seo.save()
+        self.stdout.write("  SEO seeded.")
 
-    # ── Social ──────────────────────────────────────────────────────────
+    # ── Social Links ────────────────────────────────────────────────────
     def _seed_social(self):
-        socials = [
-            ("GitHub",   "https://github.com/manshay-verma",   "icon-github",   0),
-            ("LinkedIn", "https://linkedin.com/in/manshay-verma", "icon-linkedin", 1),
+        links = [
+            {
+                "platform": "GitHub",
+                "url": "https://github.com/manshay-verma",
+                "icon": "icon-github",
+                "display_order": 0,
+            },
+            {
+                "platform": "LinkedIn",
+                "url": "https://linkedin.com/in/manshay-verma01",
+                "icon": "icon-linkedin",
+                "display_order": 1,
+            },
         ]
-        for platform, url, icon, order in socials:
-            _, created = SocialLink.objects.get_or_create(
-                platform=platform,
-                defaults={"url": url, "icon": icon, "display_order": order},
-            )
-            if created:
-                self.stdout.write(f"  Social: {platform} seeded.")
+        for l in links:
+            platform = l["platform"]
+            SocialLink.objects.update_or_create(platform=platform, defaults=l)
+            self.stdout.write(f"  SocialLink: {platform} seeded.")
+
+    # ── Journals ────────────────────────────────────────────────────────
+    def _seed_journals(self):
+        journals = [
+            {
+                "title": "My Journey in Software Engineering",
+                "slug": "my-journey-in-software-engineering",
+                "author": "Manshay Verma",
+                "read_time": "5 mins read",
+                "publish_date": "2026-08-03",
+                "excerpt": "A brief overview of how I started my journey in tech and what I learned along the way.",
+                "content": "<p>I started my journey back in college, exploring various programming languages and software engineering fundamentals. Over the years, I developed a strong passion for scalable backend architectures, cloud computing, and AI-driven automation systems.</p><p>Building real-world projects and solving complex engineering challenges has taught me the importance of writing clean, maintainable, and reliable software.</p>",
+                "external_urls": [],
+                "display_order": 0,
+            },
+            {
+                "title": "The Future of Web Development",
+                "slug": "the-future-of-web-development",
+                "author": "Manshay Verma",
+                "read_time": "4 mins read",
+                "publish_date": "2026-08-03",
+                "excerpt": "Thoughts on where web development is heading with the rise of AI and modern cloud systems.",
+                "content": "<p>The web is constantly evolving. With AI-assisted coding tools, vector search databases, and serverless cloud infrastructure, developers are becoming more productive than ever.</p><p>Integrating intelligent agentic workflows and modern web APIs is transforming how web applications interact with users and process data.</p>",
+                "external_urls": [],
+                "display_order": 1,
+            },
+            {
+                "title": "Understanding Django Architecture",
+                "slug": "understanding-django-architecture",
+                "author": "Manshay Verma",
+                "read_time": "8 mins read",
+                "publish_date": "2026-08-03",
+                "excerpt": "An in-depth look at Django's MVT architecture and why it scales so well for enterprise applications.",
+                "content": "<p>Django uses Model-View-Template architecture, which is slightly different from the traditional MVC pattern. It handles database ORM, administrative interfaces, and security out-of-the-box, making it ideal for rapid enterprise development.</p>",
+                "external_urls": [],
+                "display_order": 2,
+            },
+        ]
+        for j in journals:
+            slug = j["slug"]
+            Journal.objects.update_or_create(slug=slug, defaults=j)
+            self.stdout.write(f"  Journal: {slug} seeded.")
+

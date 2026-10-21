@@ -1,0 +1,101 @@
+/* ============================================================
+   mobile-touch.css
+   Fixes hover interactions for touch devices (mobile + tablet).
+   Strategy:
+     - @media (hover: none)  -- targets touchscreens (no pointer hover)
+     - .is-touched class     -- toggled by JS on touchstart/touchend
+   ============================================================ */
+
+/* 1. Project Cards: always show overlay on touch devices */
+@media (hover: none) {
+  .portfolio-item .overlay {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .portfolio-item .overlay:before {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .portfolio-item.is-touched img {
+    -webkit-transform: scale(1.06);
+    -ms-transform: scale(1.06);
+    transform: scale(1.06);
+  }
+  .portfolio-item.is-touched .overlay:before {
+    background: rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* 2. Skill Cards: tap feedback */
+@media (hover: none) {
+  .feature-v1.is-touched {
+    transform: translateY(-4px) !important;
+    border-color: rgba(167, 139, 250, 0.4) !important;
+    box-shadow: 0 12px 30px rgba(124, 106, 245, 0.2) !important;
+  }
+}
+
+/* 3. Certification Cards: tap feedback */
+@media (hover: none) {
+  .cert-card-v2.is-touched {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: #D63447;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  }
+  .cert-card-v2 a.cert-btn:active {
+    background: #D63447;
+    color: #fff;
+  }
+  .cert-card-v2 a.cert-btn {
+    padding: 14px 30px;
+  }
+}
+
+/* 4. Journal Cards: tap feedback */
+@media (hover: none) {
+  .journal-card.is-touched {
+    transform: translateY(-6px) !important;
+    border-color: rgba(124, 106, 245, 0.4) !important;
+    box-shadow: 0 12px 30px rgba(124, 106, 245, 0.18) !important;
+  }
+  .journal-card.is-touched .journal-card-img {
+    transform: scale(1.06) !important;
+  }
+}
+
+/* 5. Project Detail Cards (portfolio-single page) */
+@media (hover: none) {
+  .project-detail-card.is-touched {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+  .tech-tag:active {
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* 6. Buttons: better touch feedback */
+@media (hover: none) {
+  .btn.btn-outline-pill.btn-custom-light:active {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* 7. Cursor */
+@media (hover: none) {
+  .portfolio-item,
+  .cert-card-v2,
+  .journal-card,
+  .feature-v1 {
+    cursor: pointer;
+  }
+}
